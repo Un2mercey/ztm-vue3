@@ -7,10 +7,21 @@
     </head>
     <body>
     <div id="app">
-        <button class="move" type="button">Move to Bottom</button>
-        <div class="card">
-            <h3>Name</h3>
-            <p>Message</p>
+        <button
+            class="move"
+            type="button"
+            @click="move"
+        >
+            Move to Bottom
+        </button>
+        <div
+            v-for="person in people"
+            :key="person.name"
+            class="card"
+        >
+            <h3>{{ person.name }}</h3>
+            <p>{{ person.message }}</p>
+            <input type="text" />
         </div>
     </div>
 
