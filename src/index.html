@@ -7,6 +7,25 @@
     </head>
     <body>
         <div id="app">
+            <ul>
+                <li
+                    v-for="(bird, index) in birds"
+                    :class="bird"
+                    :key="bird"
+                >
+                    {{ bird }} - {{ index }}
+                </li>
+            </ul>
+
+            <hr />
+
+            <ul>
+                <li v-for="person in people">
+                    <div v-for="(value, key, index) in person">
+                        {{ key }}: {{ value }} - Index: {{ index }}
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <script src="https://unpkg.com/vue@next"></script>
