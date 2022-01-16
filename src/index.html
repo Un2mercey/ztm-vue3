@@ -6,28 +6,26 @@
         <link href="favicon.png" rel="shortcut icon" type="image/png"/>
     </head>
     <body>
-        <div id="app">
-            <div v-if="mode === 1">
-                Showing v-if directive content
-            </div>
-            <template v-else-if="mode === 2">
-                <div>Bonus content</div>
-                <h3>v-else-if</h3>
-            </template>
-            <div v-else>v-else</div>
-            <label class="selector">
-                Current mode:
-                <select class="select" v-model.number="mode">
-                    <option value="1">v-if</option>
-                    <option value="2">v-else-if</option>
-                    <option value="3">v-else</option>
-                </select>
-            </label>
-
-            <i v-show="mode === 1" style="display: block;">v-show</i>
+    <div id="app">
+        <button
+            class="move"
+            type="button"
+            @click="move"
+        >
+            Move to Bottom
+        </button>
+        <div
+            v-for="person in people"
+            :key="person.name"
+            class="card"
+        >
+            <h3>{{ person.name }}</h3>
+            <p>{{ person.message }}</p>
+            <input type="text" />
         </div>
+    </div>
 
-        <script src="https://unpkg.com/vue@next"></script>
-        <script src="app.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
     </body>
 </html>
