@@ -21,11 +21,14 @@
             <label>First Name</label>
             <input type="text" v-model="firstName" />
 
+            <label>Middle Name</label>
+            <input type="text" @keyup.enter="updateMiddleName" />
+
             <label>Last Name</label>
             <input type="text" :value="lastName" @input.prevent="updateLastName('Last name event triggered!', $event)" />
 
             <button type="button" @click="increment">Increment</button>
-            <button type="button" @click="age--">Decrement</button>
+            <button type="button" @click.ctrl="age--">Decrement</button>
         </div>
 
 <!--        <div id="app-2">-->
