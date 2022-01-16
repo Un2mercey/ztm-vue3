@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>VueJS Course</title>
+        <link href="main.css" rel="stylesheet" type="text/css"/>
+        <link href="favicon.png" rel="shortcut icon" type="image/png"/>
+    </head>
+    <body>
+    <div id="app">
+        <button
+            class="move"
+            type="button"
+            @click="move"
+        >
+            Move to Bottom
+        </button>
+        <div
+            v-for="person in people"
+            :key="person.name"
+            class="card"
+        >
+            <h3>{{ person.name }}</h3>
+            <p>{{ person.message }}</p>
+            <input type="text" />
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+    </body>
+</html>
