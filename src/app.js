@@ -28,7 +28,15 @@ const vm = Vue.createApp({
 
             return `${this.firstName} ${this.middleName} ${this.lastName.toUpperCase()}`;
         },
-    }
+    },
+    watch: {
+        age(nevValue, oldValue) {
+            setTimeout(() => {
+                console.log("Watch for age property was called");
+                this.age = 20;
+            }, 3000);
+        },
+    },
 }).mount("#app");
 
 // setTimeout(() => {
