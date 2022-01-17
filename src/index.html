@@ -43,21 +43,20 @@
                             v-model="rotateZ"
                         />
 
-                        <button type="button" @click.prevent="reset()">Reset</button>
-                        <button type="button">Copy</button>
+                        <button type="button" @click.prevent="reset">Reset</button>
+                        <button type="button" @click.prevent="copy">Copy</button>
                     </div>
                 </section>
                 <section class="output">
                     <div class="box-container">
-                        <div
-                            class="box"
-                            :style="box"
-                        >
-                        </div>
+                        <div class="box" :style="box"></div>
                     </div>
                 </section>
             </main>
 
+            <div class="snackbar" v-if="isSnackbarVisible">
+                Copied to clipboard
+            </div>
         </div>
 
         <css-doodle>
