@@ -5,8 +5,13 @@
         "start-dev": "webpack --mode=development",
         "build-prod": "webpack --mode=production"
     },
+    "dependencies": {
+        "@babel/preset-env": "^7.16.8",
+        "babel-loader": "^8.2.3"
+    },
     "devDependencies": {
         "webpack": "^5.66.0",
         "webpack-cli": "^4.9.1"
-    }
+    },
+    "license": "ISC"
 }
