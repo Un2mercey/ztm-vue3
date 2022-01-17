@@ -1,8 +1,0 @@
-{
-    "private": false,
-    "scripts": {
-    },
-    "dependencies": {
-        "vue": "^3.2.26"
-    }
-}
