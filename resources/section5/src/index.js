@@ -1,5 +1,5 @@
-import pizza from "./pizza";
-import "./main.scss";
+import pizza from "./js/pizza";
+import "./styles/main.scss";
 
 pizza.pepperoni();
 pizza.bacon();
