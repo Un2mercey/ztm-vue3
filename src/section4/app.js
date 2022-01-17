@@ -1,9 +1,5 @@
 let vm = Vue.createApp({
-    data() {
-        return {
-            message: "Hello world!",
-        }
-    },
+
 });
 
 // let vm2 = Vue.createApp({
@@ -19,6 +15,15 @@ let vm = Vue.createApp({
 //         );
 //     },
 // });
+
+vm.component("hello", {
+    template: `<h1>{{ message }}</h1>`,
+    data() {
+        return {
+            message: "Hello world!",
+        };
+    },
+});
 
 
 vm.mount("#app");
