@@ -4,23 +4,22 @@ let vm = Vue.createApp({
             message: "Hello world!",
         }
     },
-    template: `{{ message }}`
 });
 
-let vm2 = Vue.createApp({
-    data() {
-        return {
-            message: "Hello world!",
-        };
-    },
-    render() {
-        return Vue.h(
-            "h1",
-            this.message,
-        );
-    },
-});
+// let vm2 = Vue.createApp({
+//     data() {
+//         return {
+//             message: "Hello world!",
+//         };
+//     },
+//     render() {
+//         return Vue.h(
+//             "h1",
+//             this.message,
+//         );
+//     },
+// });
 
 
 vm.mount("#app");
-vm2.mount("#app2");
+// vm2.mount("#app2");
