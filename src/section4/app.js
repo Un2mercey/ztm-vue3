@@ -1,7 +1,13 @@
 let vm = Vue.createApp({
-  data() {
-    return {
-      message: "Hello world!"
+    data() {
+        return {
+            message: "Hello world!"
+        }
     }
-  }
-}).mount('#app')
+});
+
+vm.mount('#app')
+
+// setTimeout(() => {
+//     vm.mount('#app')
+// }, 3000);
