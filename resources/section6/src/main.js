@@ -1,8 +1,8 @@
 import { createApp } from "vue"
-import App from "./App.vue"
+import app from "./app.vue"
 // import Greeting from "./components/Greeting";
 
-const vm = createApp(App);
+const vm = createApp(app);
 
 // vm.component("Greeting", Greeting);
 

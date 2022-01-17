@@ -1,14 +1,15 @@
 <template>
+    <p>Hey!</p>
     <greeting />
 </template>
 
 <script>
-import Greeting from "./components/Greeting";
+import greeting from "./components/greeting";
 
 export default {
-    name: "App",
+    name: "app",
     components: {
-        Greeting,
+        greeting,
     },
 }
 </script>
