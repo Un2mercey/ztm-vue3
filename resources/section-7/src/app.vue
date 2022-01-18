@@ -6,7 +6,7 @@
             <button type="button" @click="toggle(FLAG_KEYS.THIRD)">Toogle third</button>
         </section>
 
-        <transition mode="out-in" name="fade" appear>
+        <transition appear mode="out-in" name="fade">
             <h2 v-if="firstFlag" key="main">First Hello!</h2>
             <h2 v-else key="secondary">Another first Hello!</h2>
         </transition>
@@ -16,14 +16,15 @@
         </transition>
 
         <transition
-            @before-enter="beforeEnter"
             @enter="enter"
+            @leave="leave"
+            @before-enter="beforeEnter"
             @after-enter="afterEnter"
             @before-leave="beforeLeave"
-            @leave="leave"
             @after-leave="afterLeave"
             @enter-cancelled="enterCancelled"
             @leave-cancelled="leaveCancelled"
+            :css="false"
         >
             <h2 v-if="thirdFlag" key="main">Third Hello!</h2>
         </transition>
@@ -57,7 +58,19 @@ export default {
         },
         enter(el, done) {
             console.log("enter transition hook fired!", el);
-            done();
+
+            const animation = el.animate([
+                {
+                    transform: "scale3d(0,0,0)",
+                },
+                {},
+            ], {
+                duration: 1000,
+            });
+
+            animation.onfinish = () => {
+                done();
+            };
         },
         afterEnter(el) {
             console.log("afterEnter transition hook fired!", el);
@@ -67,7 +80,19 @@ export default {
         },
         leave(el, done) {
             console.log("leave transition hook fired!", el);
-            done();
+
+            const animation = el.animate([
+                {},
+                {
+                    transform: "scale3d(0,0,0)",
+                },
+            ], {
+                duration: 1000,
+            });
+
+            animation.onfinish = () => {
+                done();
+            };
         },
         afterLeave(el) {
             console.log("afterLeave transition hook fired!", el);
