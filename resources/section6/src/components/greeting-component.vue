@@ -4,13 +4,13 @@
 
 <script>
 export default {
-    name: "greeting",
+    name: "greetingComponent",
     data() {
         return {
             msg: "Hello World!",
         };
     },
-}
+};
 </script>
 
 <style scoped lang="scss">
