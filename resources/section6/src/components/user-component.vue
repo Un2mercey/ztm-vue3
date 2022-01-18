@@ -1,6 +1,7 @@
 <template>
     <div>
-        The user is {{ age }} years old
+        <p>The user is {{ age }} years old</p>
+        <button type="button" @click="age++">Update age</button>
     </div>
 </template>
 

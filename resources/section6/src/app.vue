@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Hey!</h3>
-        <greetingComponent/>
+        <greetingComponent :age="age"/>
         <userComponent :age="age"/>
     </div>
 </template>
