@@ -83,6 +83,14 @@ main {
     align-items: center;
 }
 
+.animate__flipOutX {
+    position: absolute;
+}
+
+.animate__animated {
+    animation-duration: 3s;
+}
+
 .fade-enter-from {
     opacity: 0;
 }

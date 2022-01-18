@@ -50,6 +50,19 @@
                     {{ number }}
                 </li>
             </transition-group>
+<!--            <transition-group-->
+<!--                tag="ul"-->
+<!--                enter-active-class="animate__animated animate__flipInX"-->
+<!--                leave-active-class="animate__animated animate__flipOutX"-->
+<!--            >-->
+<!--                <li-->
+<!--                    v-for="(number, index) in numbers"-->
+<!--                    :key="number"-->
+<!--                    @click="removeNumber(index)"-->
+<!--                >-->
+<!--                    {{ number }}-->
+<!--                </li>-->
+<!--            </transition-group>-->
         </section>
     </main>
 </template>
