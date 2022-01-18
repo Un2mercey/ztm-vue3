@@ -1,34 +1,56 @@
 <template>
     <main>
-        <section>
-            <button type="button" @click="toggle(FLAG_KEYS.FIRST)">Toogle first</button>
-            <button type="button" @click="toggle(FLAG_KEYS.SECOND)">Toogle second</button>
-            <button type="button" @click="toggle(FLAG_KEYS.THIRD)">Toogle third</button>
+        <section class="flex justify-space-around">
+            <button type="button" @click="toggle(FLAG_KEYS.FIRST)">toogle first</button>
+            <button type="button" @click="toggle(FLAG_KEYS.SECOND)">toogle second</button>
+            <button type="button" @click="toggle(FLAG_KEYS.THIRD)">toogle third</button>
         </section>
 
-        <transition appear mode="out-in" name="fade">
-            <h2 v-if="firstFlag" key="main">First Hello!</h2>
-            <h2 v-else key="secondary">Another first Hello!</h2>
-        </transition>
+        <section class="flex justify-space-around">
+            <transition appear mode="out-in" name="fade">
+                <h2 v-if="firstFlag" key="main">First Hello!</h2>
+                <h2 v-else key="secondary">Another first Hello!</h2>
+            </transition>
+        </section>
 
-        <transition name="zoom" type="animation">
-            <h2 v-if="secondFlag" key="main">Second Hello!</h2>
-        </transition>
+        <section class="flex justify-space-around">
+            <transition name="zoom" type="animation">
+                <h2 v-if="secondFlag" key="main">Second Hello!</h2>
+            </transition>
+        </section>
 
-        <transition
-            @enter="enter"
-            @leave="leave"
-            @before-enter="beforeEnter"
-            @after-enter="afterEnter"
-            @before-leave="beforeLeave"
-            @after-leave="afterLeave"
-            @enter-cancelled="enterCancelled"
-            @leave-cancelled="leaveCancelled"
-            :css="true"
-            name="fade"
-        >
-            <h2 v-if="thirdFlag" key="main">Third Hello!</h2>
-        </transition>
+        <section class="flex justify-center">
+            <transition
+                :css="true"
+                name="fade"
+                @enter="enter"
+                @leave="leave"
+                @before-enter="beforeEnter"
+                @after-enter="afterEnter"
+                @before-leave="beforeLeave"
+                @after-leave="afterLeave"
+                @enter-cancelled="enterCancelled"
+                @leave-cancelled="leaveCancelled"
+            >
+                <h2 v-if="thirdFlag" key="main">Third Hello!</h2>
+            </transition>
+        </section>
+
+        <section class="flex justify-center direction-column align-center">
+            <button type="button" @click="addNumber">add</button>
+            <ul>
+                <transition-group name="fade">
+                    <li
+                        v-for="(number, index) in numbers"
+                        :key="index"
+                        @click="removeNumber(index)"
+                    >
+                        {{ number }}
+                    </li>
+                </transition-group>
+            </ul>
+        </section>
+
     </main>
 </template>
 
@@ -48,11 +70,20 @@ export default {
             firstFlag: true,
             secondFlag: false,
             thirdFlag: false,
+            numbers: [1, 2, 3, 4, 5],
         };
     },
     methods: {
         toggle(key) {
             this[key] = !this[key];
+        },
+        addNumber() {
+            const num = Math.floor(Math.random() * (this.numbers.length + 1) * 100);
+            const idx = Math.floor(Math.random() * this.numbers.length);
+            this.numbers.splice(idx, 0, num);
+        },
+        removeNumber(index) {
+            this.numbers.splice(index, 1);
         },
         beforeEnter(el) {
             console.log("beforeEnter transition hook fired!", el);
