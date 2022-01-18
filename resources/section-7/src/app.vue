@@ -37,24 +37,25 @@
         </section>
 
         <section class="flex justify-center direction-column align-center">
-            <button type="button" @click="addNumber">add</button>
-            <ul>
-                <transition-group name="fade">
-                    <li
-                        v-for="(number, index) in numbers"
-                        :key="index"
-                        @click="removeNumber(index)"
-                    >
-                        {{ number }}
-                    </li>
-                </transition-group>
-            </ul>
+            <div class="flex justify-space-around">
+                <button type="button" @click="addNumber">add</button>
+                <button type="button" @click="shuffleNumbers">shuffle</button>
+            </div>
+            <transition-group name="fade" tag="ul">
+                <li
+                    v-for="(number, index) in numbers"
+                    :key="number"
+                    @click="removeNumber(index)"
+                >
+                    {{ number }}
+                </li>
+            </transition-group>
         </section>
-
     </main>
 </template>
 
 <script>
+import * as _ from "lodash";
 
 const FLAG_KEYS = {
     FIRST: "firstFlag",
@@ -77,13 +78,18 @@ export default {
         toggle(key) {
             this[key] = !this[key];
         },
+        getRandomIndex() {
+            return Math.floor(Math.random() * this.numbers.length);
+        },
         addNumber() {
-            const num = Math.floor(Math.random() * (this.numbers.length + 1) * 100);
-            const idx = Math.floor(Math.random() * this.numbers.length);
-            this.numbers.splice(idx, 0, num);
+            const newNumber = Math.floor(Math.random() * 100 * (this.getRandomIndex() + 1));
+            this.numbers.splice(this.getRandomIndex(), 0, newNumber);
         },
         removeNumber(index) {
             this.numbers.splice(index, 1);
+        },
+        shuffleNumbers() {
+            this.numbers = _.shuffle(this.numbers);
         },
         beforeEnter(el) {
             console.log("beforeEnter transition hook fired!", el);

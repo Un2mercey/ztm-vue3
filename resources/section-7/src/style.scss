@@ -43,7 +43,7 @@ main {
 
         button {
             padding: 12px 20px;
-            margin: 0;
+            margin: 0 20px;
             text-transform: uppercase;
             background-color: $color;
             border: 1px solid $color;
@@ -88,12 +88,20 @@ main {
 }
 
 .fade-enter-active {
-    transition: all 1s linear;
+    transition: all .4s linear;
 }
 
 .fade-leave-to {
-    transition: all 1s linear;
+    transition: all .4s linear;
     opacity: 0;
+}
+
+.fade-move {
+    transition: all .4s linear;
+}
+
+.fade-leave-active {
+    position: absolute;
 }
 
 .zoom-enter-active {
