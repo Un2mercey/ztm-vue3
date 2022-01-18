@@ -1,0 +1,29 @@
+{
+    "name": "section6",
+    "private": false,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "core-js": "^3.6.5",
+        "vue": "^3.0.0"
+    },
+    "devDependencies": {
+        "@Un2mercey/eslint-config-vue": "git+ssh://git@github.com:Un2mercey/eslint-config-vue.git",
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/compiler-sfc": "^3.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "6.8.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-vue": "^8.3.0",
+        "node-sass": "5.0.0",
+        "sass-loader": "10.1.0",
+        "webpack": "^5.0.0"
+    },
+    "license": "ISC"
+}
