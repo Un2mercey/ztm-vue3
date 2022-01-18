@@ -11,7 +11,12 @@ export default {
     props: {
         age: {
             type: Number,
-            required: false,
+            // required: true,
+            // default: 20,
+            validator(value) {
+                // this.updateAge(); -- undefined
+                return value < 130;
+            },
         },
     },
     emits: ["age-change"],
