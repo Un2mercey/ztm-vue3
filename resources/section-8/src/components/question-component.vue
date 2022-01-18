@@ -1,31 +1,33 @@
 <template>
     <div class="questions-ctr">
         <div class="progress">
-            <div class="bar" :style="progressBarStyle"></div>
+            <div :style="progressBarStyle" class="bar"></div>
             <div class="status">
                 {{ questionsAnswered }} out of {{ questions.length }} questions answered
             </div>
         </div>
-        <div
-            v-for="(question, qi) in questions"
-            :key="question.q"
-            v-show="questionsAnswered === qi"
-            class="single-question"
-        >
-            <div class="question">
-                {{ question.q }}
-            </div>
-            <div class="answers">
-                <div
-                    v-for="answer in question.answers"
-                    :key="answer.text"
-                    @click="selectAnswer(answer.isCorrect)"
-                    class="answer"
-                >
-                    {{ answer.text }}
+        <transition-group name="fade">
+            <div
+                v-for="(question, qi) in questions"
+                v-show="questionsAnswered === qi"
+                :key="question.q"
+                class="single-question"
+            >
+                <div class="question">
+                    {{ question.q }}
+                </div>
+                <div class="answers">
+                    <div
+                        v-for="answer in question.answers"
+                        :key="answer.text"
+                        class="answer"
+                        @click="selectAnswer(answer.isCorrect)"
+                    >
+                        {{ answer.text }}
+                    </div>
                 </div>
             </div>
-        </div>
+        </transition-group>
     </div>
 </template>
 
