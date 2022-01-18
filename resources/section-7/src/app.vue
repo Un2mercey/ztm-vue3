@@ -3,15 +3,29 @@
         <section>
             <button type="button" @click="toggle(FLAG_KEYS.FIRST)">Toogle first</button>
             <button type="button" @click="toggle(FLAG_KEYS.SECOND)">Toogle second</button>
+            <button type="button" @click="toggle(FLAG_KEYS.THIRD)">Toogle third</button>
         </section>
 
         <transition mode="out-in" name="fade" appear>
-            <h2 v-if="firstFlag" key="main">Hello, world!</h2>
-            <h2 v-else key="secondary">Another Hello!</h2>
+            <h2 v-if="firstFlag" key="main">First Hello!</h2>
+            <h2 v-else key="secondary">Another first Hello!</h2>
         </transition>
 
         <transition name="zoom" type="animation">
-            <h2 v-if="secondFlag" key="main">Second Hello, world!</h2>
+            <h2 v-if="secondFlag" key="main">Second Hello!</h2>
+        </transition>
+
+        <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            @leave="leave"
+            @after-leave="afterLeave"
+            @enter-cancelled="enterCancelled"
+            @leave-cancelled="leaveCancelled"
+        >
+            <h2 v-if="thirdFlag" key="main">Third Hello!</h2>
         </transition>
     </main>
 </template>
@@ -21,6 +35,7 @@
 const FLAG_KEYS = {
     FIRST: "firstFlag",
     SECOND: "secondFlag",
+    THIRD: "thirdFlag",
 };
 
 export default {
@@ -30,107 +45,43 @@ export default {
             FLAG_KEYS,
             firstFlag: true,
             secondFlag: false,
+            thirdFlag: false,
         };
     },
     methods: {
         toggle(key) {
             this[key] = !this[key];
         },
+        beforeEnter(el) {
+            console.log("beforeEnter transition hook fired!", el);
+        },
+        enter(el, done) {
+            console.log("enter transition hook fired!", el);
+            done();
+        },
+        afterEnter(el) {
+            console.log("afterEnter transition hook fired!", el);
+        },
+        beforeLeave(el) {
+            console.log("beforeLeave transition hook fired!", el);
+        },
+        leave(el, done) {
+            console.log("leave transition hook fired!", el);
+            done();
+        },
+        afterLeave(el) {
+            console.log("afterLeave transition hook fired!", el);
+        },
+        enterCancelled(el) {
+            console.log("enterCancelled transition hook fired!", el);
+        },
+        leaveCancelled(el) {
+            console.log("leaveCancelled transition hook fired!", el);
+        },
     },
 };
 </script>
 
 <style lang="scss">
-$color: rgba(0, 128, 64, 0.61);
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-main {
-    padding: 40px;
-
-    h2 {
-        width: 400px;
-        padding: 20px;
-        margin: 0 auto;
-        color: $color;
-        font-size: 28px;
-    }
-
-    section {
-        display: flex;
-        justify-content: space-around;
-
-        button {
-            padding: 12px 20px;
-            margin: 0;
-            text-transform: uppercase;
-            background-color: $color;
-            border: 1px solid $color;
-            border-radius: 4px;
-            color: whitesmoke;
-
-            &:hover {
-                background-color: lighten($color, 5);
-                border-color: lighten($color, 5);
-            }
-
-            &:active {
-                background-color: darken($color, 5);
-                border-color: darken($color, 5);
-            }
-        }
-    }
-
-    .fade-enter-from {
-        opacity: 0;
-    }
-
-    .fade-enter-active {
-        transition: all 1s linear;
-    }
-
-    .fade-leave-to {
-        transition: all 1s linear;
-        opacity: 0;
-    }
-
-    .zoom-enter-active {
-        animation: zoom-in 1s linear forwards;
-        transition: all 2s linear;
-    }
-
-    .zoom-leave-active {
-        animation: zoom-out 1s linear forwards;
-        transition: all 2s linear;
-    }
-
-    .zoom-enter-from {
-        opacity: 0;
-    }
-
-    .zoom-leave-to {
-        opacity: 1;
-
-    }
-}
-
-@keyframes zoom-in {
-    from {
-        transform: scale(0, 0);
-    }
-    to {
-        transform: scale(1, 1);
-    }
-}
-
-@keyframes zoom-out {
-    from {
-        transform: scale(1, 1);
-    }
-    to {
-        transform: scale(0, 0);
-    }
-}
+@import "./style";
 </style>
