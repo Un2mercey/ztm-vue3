@@ -24,7 +24,8 @@
             @after-leave="afterLeave"
             @enter-cancelled="enterCancelled"
             @leave-cancelled="leaveCancelled"
-            :css="false"
+            :css="true"
+            name="fade"
         >
             <h2 v-if="thirdFlag" key="main">Third Hello!</h2>
         </transition>
@@ -56,21 +57,22 @@ export default {
         beforeEnter(el) {
             console.log("beforeEnter transition hook fired!", el);
         },
-        enter(el, done) {
+        // enter(el, done) {
+        enter(el) {
             console.log("enter transition hook fired!", el);
 
-            const animation = el.animate([
-                {
-                    transform: "scale3d(0,0,0)",
-                },
-                {},
-            ], {
-                duration: 1000,
-            });
-
-            animation.onfinish = () => {
-                done();
-            };
+            // const animation = el.animate([
+            //     {
+            //         transform: "scale3d(0,0,0)",
+            //     },
+            //     {},
+            // ], {
+            //     duration: 1000,
+            // });
+            //
+            // animation.onfinish = () => {
+            //     done();
+            // };
         },
         afterEnter(el) {
             console.log("afterEnter transition hook fired!", el);
@@ -78,21 +80,22 @@ export default {
         beforeLeave(el) {
             console.log("beforeLeave transition hook fired!", el);
         },
-        leave(el, done) {
+        // leave(el, done) {
+        leave(el) {
             console.log("leave transition hook fired!", el);
 
-            const animation = el.animate([
-                {},
-                {
-                    transform: "scale3d(0,0,0)",
-                },
-            ], {
-                duration: 1000,
-            });
-
-            animation.onfinish = () => {
-                done();
-            };
+            // const animation = el.animate([
+            //     {},
+            //     {
+            //         transform: "scale3d(0,0,0)",
+            //     },
+            // ], {
+            //     duration: 1000,
+            // });
+            //
+            // animation.onfinish = () => {
+            //     done();
+            // };
         },
         afterLeave(el) {
             console.log("afterLeave transition hook fired!", el);
