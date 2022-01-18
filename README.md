@@ -27,7 +27,7 @@ Open <code>index.html</code> file in your browser
 
 <hr />
 
-# Section 6
+# Section 6, 7
 
 ## Project setup
 ```
