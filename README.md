@@ -1,4 +1,4 @@
-# Section 2, 3, 4
+# Section 2 - 4
 
 ### Run application
 Open <code>index.html</code> file in your browser
@@ -27,7 +27,7 @@ Open <code>index.html</code> file in your browser
 
 <hr />
 
-# Section 6, 7, 8
+# Section 6 - 9
 
 ## Project setup
 ```
