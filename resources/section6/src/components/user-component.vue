@@ -1,7 +1,8 @@
 <template>
     <div>
-        <p>The user is {{ ageDoubled }} years old</p>
+        <p>The user is {{ age }} years old</p>
         <button type="button" @click="updateAge">Update age</button>
+        <button type="button" @click="ageChangeFn(3)">Update age CB</button>
     </div>
 </template>
 
@@ -17,6 +18,10 @@ export default {
                 // this.updateAge(); -- undefined
                 return value < 130;
             },
+        },
+        ageChangeFn: {
+            type: Function,
+            required: true,
         },
     },
     emits: ["age-change"],

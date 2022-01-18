@@ -2,7 +2,11 @@
     <div>
         <h3>Hey!</h3>
         <greetingComponent :age="age"/>
-        <userComponent :age="age" @age-change="onAgeChange"/>
+        <userComponent
+            :age="age"
+            :ageChangeFn="ageChangeCB"
+            @age-change="onAgeChange"
+        />
     </div>
 </template>
 
@@ -18,12 +22,15 @@ export default {
     },
     data() {
         return {
-            age: 130,
+            age: 20,
         };
     },
     methods: {
         onAgeChange(num) {
-            this.age = num;
+            this.age += num;
+        },
+        ageChangeCB(num) {
+            this.age += num;
         },
     },
 };
