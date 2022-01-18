@@ -1,9 +1,7 @@
 import { createApp } from "vue";
 import app from "./app.vue";
-// import Greeting from "./components/Greeting";
+import "animate.css";
 
 const vm = createApp(app);
-
-// vm.component("Greeting", Greeting);
 
 vm.mount("#app");
