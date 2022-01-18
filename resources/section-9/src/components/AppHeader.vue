@@ -7,7 +7,11 @@
             <div class="flex flex-grow items-center">
                 <ul class="flex flex-row mt-1">
                     <li>
-                        <a class="px-2 text-white" href="#">
+                        <a
+                            class="px-2 text-white"
+                            href="#"
+                            @click.prevent="toggleAuthModal"
+                        >
                             Login / Register
                         </a>
                     </li>
@@ -25,5 +29,10 @@
 <script>
 export default {
     name: "AppHeader",
+    methods: {
+        toggleAuthModal() {
+            this.$store.state.isAuthModalShown = !this.$store.state.isAuthModalShown;
+        },
+    },
 };
 </script>
