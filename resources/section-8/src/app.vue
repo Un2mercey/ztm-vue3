@@ -1,35 +1,113 @@
 <template>
-    <main>
-        <div class="ctr">
-            <div class="questions-ctr">
-                <div class="progress">
-                    <div class="bar"></div>
-                    <div class="status">1 out of 3 questions answered</div>
-                </div>
-                <div class="single-question">
-                    <div class="question">Sample Question 1</div>
-                    <div class="answers">
-                        <div class="answer">Sample Answer 1</div>
-                        <div class="answer">Sample Answer 2</div>
-                        <div class="answer">Sample Answer 3</div>
-                        <div class="answer">Sample Answer 4</div>
-                    </div>
-                </div>
-            </div>
-            <div class="result">
-                <div class="title">You got sample result 1!</div>
-                <div class="desc">
-                    Enter a short description here about the result.
-                </div>
-            </div>
-            <button type="button" class="reset-btn">Reset</button>
-        </div>
-    </main>
+    <div class="ctr">
+        <questionComponent
+            v-if="questionAnswered < questions.length"
+            :questions="questions"
+        />
+
+        <resultComponent
+            v-else
+        />
+
+        <button
+            class="reset-btn"
+            type="button"
+        >
+            Reset
+        </button>
+    </div>
 </template>
 
 <script>
+import questionComponent from "./components/question-component";
+import resultComponent from "./components/result-component";
+
 export default {
     name: "app",
+    components: {
+        questionComponent,
+        resultComponent,
+    },
+    data() {
+        return {
+            questionAnswered: 0,
+            questions: [
+                {
+                    q: "What is 2 + 2?",
+                    answers: [
+                        {
+                            text: "4",
+                            isCorrect: true,
+                        },
+                        {
+                            text: "3",
+                            isCorrect: false,
+                        },
+                        {
+                            text: "Fish",
+                            isCorrect: false,
+                        },
+                        {
+                            text: "5",
+                            isCorrect: false,
+                        },
+                    ],
+                },
+                {
+                    q: 'How many letters are in the word "Banana"?',
+                    answers: [
+                        {
+                            text: "5",
+                            isCorrect: false,
+                        },
+                        {
+                            text: "7",
+                            isCorrect: false,
+                        },
+                        {
+                            text: "6",
+                            isCorrect: true,
+                        },
+                        {
+                            text: "12",
+                            isCorrect: false,
+                        },
+                    ],
+                },
+                {
+                    q: "Find the missing letter: C_ke",
+                    answers: [
+                        {
+                            text: "e",
+                            isCorrect: false,
+                        },
+                        {
+                            text: "a",
+                            isCorrect: true,
+                        },
+                        {
+                            text: "i",
+                            isCorrect: false,
+                        },
+                    ],
+                },
+            ],
+            results: [
+                {
+                    min: 0,
+                    max: 2,
+                    title: "Try again!",
+                    desc: "Do a little more studying and you may succeed!",
+                },
+                {
+                    min: 3,
+                    max: 3,
+                    title: "Wow, you're a genius!",
+                    desc: "Studying has definitely paid off for you!",
+                },
+            ],
+        };
+    },
 };
 </script>
 
