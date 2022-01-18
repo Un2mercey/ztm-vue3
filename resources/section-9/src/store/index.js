@@ -1,15 +1,20 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
+import modal from "./modules/modal";
 
-export default createStore({
-    state: {
-        isAuthModalShown: false,
+const debug = process.env.NODE_ENV !== "production";
+
+const state = {};
+const actions = {};
+const getters = {};
+const mutations = {};
+
+export default new Vuex.Store({
+    state,
+    modules: {
+        modal,
     },
-    mutations: {
-        toggleAuthModal: (state) => {
-            state.isAuthModalShown = !state.isAuthModalShown;
-        },
-    },
-    getters: {
-        getIsAuthModalShown: (state) => state.isAuthModalShown,
-    },
+    actions,
+    getters,
+    mutations,
+    strict: debug,
 });

@@ -1,8 +1,8 @@
 <template>
     <div
-        id="modal"
+        :id="modalId"
         class="fixed z-10 inset-0 overflow-y-auto"
-        :class="{ hidden: !isAuthModalShown }"
+        :class="{ hidden: !isVisible }"
     >
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity">
@@ -16,7 +16,10 @@
                         <p class="text-2xl font-bold">
                             Your Account
                         </p>
-                        <div class="modal-close cursor-pointer z-50">
+                        <div
+                            @click.prevent="closeModal"
+                            class="modal-close cursor-pointer z-50"
+                        >
                             <i class="fas fa-times"></i>
                         </div>
                     </div>
@@ -150,10 +153,24 @@ import { mapGetters } from "vuex";
 
 export default {
     name: "AppAuthModal",
+    data() {
+        return {
+            modalId: "AppAuthModal",
+        };
+    },
     computed: {
         ...mapGetters({
-            isAuthModalShown: "getIsAuthModalShown",
+            modalName: "getModalName",
+            modalIsOpen: "getModalIsOpen",
         }),
+        isVisible() {
+            return this.modalIsOpen && this.modalName === this.modalId;
+        },
+    },
+    methods: {
+        closeModal() {
+            this.$store.dispatch("closeModal");
+        },
     },
 };
 </script>

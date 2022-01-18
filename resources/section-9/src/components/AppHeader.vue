@@ -10,7 +10,7 @@
                         <a
                             class="px-2 text-white"
                             href="#"
-                            @click.prevent="toggleAuthModal"
+                            @click.prevent="openAuthModal"
                         >
                             Login / Register
                         </a>
@@ -27,15 +27,15 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-
 export default {
     name: "AppHeader",
     methods: {
-        ...mapMutations(["toggleAuthModal"]),
-        // toggleAuthModal() {
-        //     this.$store.commit("toggleAuthModal");
-        // },
+        openAuthModal() {
+            const payload = {
+                name: "AppAuthModal",
+            };
+            this.$store.dispatch("openModal", payload);
+        },
     },
 };
 </script>
