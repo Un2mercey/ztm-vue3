@@ -1,8 +1,10 @@
 <template>
     <div class="ctr">
         <questionComponent
-            v-if="questionAnswered < questions.length"
+            v-if="questionsAnswered < questions.length"
             :questions="questions"
+            :questionsAnswered="questionsAnswered"
+            @question-answered="onQuestionAnswered"
         />
 
         <resultComponent
@@ -30,7 +32,8 @@ export default {
     },
     data() {
         return {
-            questionAnswered: 0,
+            questionsAnswered: 0,
+            totalCorrect: 0,
             questions: [
                 {
                     q: "What is 2 + 2?",
@@ -107,6 +110,14 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        onQuestionAnswered(isCorrect) {
+            this.questionsAnswered += 1;
+            if (isCorrect) {
+                this.totalCorrect += 1;
+            }
+        },
     },
 };
 </script>
