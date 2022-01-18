@@ -9,4 +9,7 @@ export default createStore({
             state.isAuthModalShown = !state.isAuthModalShown;
         },
     },
+    getters: {
+        getIsAuthModalShown: (state) => state.isAuthModalShown,
+    },
 });

@@ -1,6 +1,6 @@
 <template>
-    <app-header />
-    <app-introduction />
+    <app-header></app-header>
+    <app-introduction></app-introduction>
 
     <!-- Main Content -->
     <section class="container mx-auto">
@@ -199,8 +199,8 @@
         </div>
     </section>
 
-    <app-player />
-    <app-auth-modal />
+    <app-player></app-player>
+    <app-auth-modal></app-auth-modal>
 </template>
 
 <script>

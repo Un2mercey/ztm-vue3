@@ -1,5 +1,9 @@
 <template>
-    <div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+    <div
+        id="modal"
+        class="fixed z-10 inset-0 overflow-y-auto"
+        :class="{ hidden: !isAuthModalShown }"
+    >
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity">
                 <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
@@ -142,7 +146,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
     name: "AppAuthModal",
+    computed: {
+        ...mapGetters({
+            isAuthModalShown: "getIsAuthModalShown",
+        }),
+    },
 };
 </script>
