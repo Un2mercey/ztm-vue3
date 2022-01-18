@@ -1,19 +1,31 @@
 <template>
     <div>
         <formComponent>
-            <div class="help">
-                <p>This is some help text</p>
-            </div>
-            <div class="fields">
+            <template #help>
+                <h1>{{ helpText }}</h1>
+            </template>
+            <template #fields>
                 <input type="text" placeholder="email">
                 <input type="text" placeholder="username">
                 <input type="password" placeholder="password">
-            </div>
-            <div class="buttons">
+            </template>
+            <template #buttons>
                 <button type="submit">Submit</button>
-            </div>
+            </template>
         </formComponent>
-        <formComponent />
+        <formComponent>
+            <template #help>
+                <h1>Contact help text</h1>
+            </template>
+            <template #fields>
+                <input type="text" placeholder="name">
+                <input type="text" placeholder="message">
+            </template>
+            <template #buttons>
+                <button type="submit">Submit</button>
+            </template>
+            <p>This is default slot</p>
+        </formComponent>
     </div>
 </template>
 
@@ -25,5 +37,16 @@ export default {
     components: {
         formComponent,
     },
+    data() {
+        return {
+            helpText: "This is some help text",
+        };
+    },
 };
 </script>
+
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+</style>
