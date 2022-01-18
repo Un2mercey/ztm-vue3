@@ -1,43 +1,47 @@
 {
-    "name": "section-9",
-    "private": false,
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "test:unit": "vue-cli-service test:unit",
-        "test:e2e": "vue-cli-service test:e2e",
-        "lint": "vue-cli-service lint"
-    },
-    "dependencies": {
-        "core-js": "^3.6.5",
-        "vue": "^3.0.0",
-        "vue-router": "^4.0.0-0",
-        "vuex": "^4.0.0-0"
-    },
-    "devDependencies": {
-        "@Un2mercey/eslint-config-vue": "git+ssh://git@github.com:Un2mercey/eslint-config-vue.git",
-        "@babel/core": "^7.16.7",
-        "@vue/cli-plugin-babel": "~4.5.0",
-        "@vue/cli-plugin-e2e-cypress": "~4.5.0",
-        "@vue/cli-plugin-eslint": "~4.5.0",
-        "@vue/cli-plugin-router": "~4.5.0",
-        "@vue/cli-plugin-unit-jest": "~4.5.0",
-        "@vue/cli-plugin-vuex": "~4.5.0",
-        "@vue/cli-service": "~4.5.0",
-        "@vue/compiler-sfc": "^3.0.0",
-        "@vue/eslint-config-airbnb": "^5.0.2",
-        "@vue/test-utils": "^2.0.0-0",
-        "babel-eslint": "^10.1.0",
-        "babel-jest": "^26.6.3",
-        "eslint": "^6.7.2",
-        "eslint-plugin-import": "^2.20.2",
-        "eslint-plugin-vue": "^7.0.0",
-        "jest": "^26.6.3",
-        "node-sass": "^4.12.0",
-        "sass-loader": "^8.0.2",
-        "typescript": "~3.9.3",
-        "vue-jest": "^5.0.0-0",
-        "webpack": "^5.0.0"
-    },
-    "license": "ISC"
+  "name": "section-9",
+  "private": false,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "autoprefixer": "^9",
+    "core-js": "^3.6.5",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@Un2mercey/eslint-config-vue": "git+ssh://git@github.com:Un2mercey/eslint-config-vue.git",
+    "@babel/core": "^7.16.7",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/test-utils": "^2.0.0-0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^7.0.0",
+    "jest": "^26.6.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-tailwind": "^2.2.18",
+    "vue-jest": "^5.0.0-0",
+    "webpack": "^5.0.0"
+  },
+  "license": "ISC"
 }
