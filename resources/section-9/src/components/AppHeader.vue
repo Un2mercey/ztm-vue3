@@ -31,7 +31,7 @@ export default {
     name: "AppHeader",
     methods: {
         toggleAuthModal() {
-            this.$store.state.isAuthModalShown = !this.$store.state.isAuthModalShown;
+            this.$store.commit("toggleAuthModal");
         },
     },
 };
