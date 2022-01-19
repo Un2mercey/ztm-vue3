@@ -1,13 +1,17 @@
-# Section 2 - 4
+# Udemy Course
+
+[Link](https://www.udemy.com/course/complete-vue-js-developer-zero-to-mastery-vuex/)
+
+## Section 2 - 4
 
 ### Run application
 Open <code>index.html</code> file in your browser
 
 <hr />
 
-# Section 5
+## Section 5
 
-## Project setup
+### Project setup
 ```
 yarn install
 ```
@@ -27,9 +31,9 @@ Open <code>index.html</code> file in your browser
 
 <hr />
 
-# Section 6 - 9
+## Section 6 - 20
 
-## Project setup
+### Project setup
 ```
 yarn install
 ```
