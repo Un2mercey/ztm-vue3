@@ -9,6 +9,7 @@ import {
     min,
     max,
     email,
+    confirmed,
     min_value as minValue,
     max_value as maxValue,
     alpha_spaces as alphaSpaces,
@@ -24,6 +25,7 @@ const validation = {
         defineRule("min", min);
         defineRule("max", max);
         defineRule("email", email);
+        defineRule("confirmed", confirmed);
         defineRule("minValue", minValue);
         defineRule("maxValue", maxValue);
         defineRule("alphaSpaces", alphaSpaces);
