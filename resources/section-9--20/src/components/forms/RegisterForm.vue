@@ -70,7 +70,7 @@ export default {
             validationSchema: {
                 name: "required|min:3|max:100|alphaSpaces",
                 email: "required|min:3|max:100|email",
-                age: "",
+                age: "required|minValue:18|maxValue:100",
                 password: "",
                 confirmPassword: "",
                 country: "",

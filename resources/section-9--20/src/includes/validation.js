@@ -9,6 +9,8 @@ import {
     min,
     max,
     email,
+    min_value as minValue,
+    max_value as maxValue,
     alpha_spaces as alphaSpaces,
 } from "@vee-validate/rules";
 
@@ -22,6 +24,8 @@ const validation = {
         defineRule("min", min);
         defineRule("max", max);
         defineRule("email", email);
+        defineRule("minValue", minValue);
+        defineRule("maxValue", maxValue);
         defineRule("alphaSpaces", alphaSpaces);
     },
 };
