@@ -32,7 +32,7 @@ export default {
     methods: {
         openAuthModal() {
             const payload = {
-                name: "AppAuthModal",
+                name: "AuthModal",
             };
             this.$store.dispatch("openModal", payload);
         },

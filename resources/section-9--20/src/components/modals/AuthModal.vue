@@ -84,80 +84,8 @@
                         </form>
                     </template>
 
-                    <template v-else>
-                        <form>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Name
-                                </label>
-                                <input placeholder="Enter Name"
-                                       type="text"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Email
-                                </label>
-                                <input placeholder="Enter Email"
-                                       type="email"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Age
-                                </label>
-                                <input type="number"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Password
-                                </label>
-                                <input placeholder="Password"
-                                       type="password"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Confirm Password
-                                </label>
-                                <input placeholder="Confirm Password"
-                                       type="password"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Country
-                                </label>
-                                <select class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                           duration-500 focus:outline-none focus:border-black rounded"
-                                >
-                                    <option value="USA">USA</option>
-                                    <option value="Mexico">Mexico</option>
-                                    <option value="Germany">Germany</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 pl-6">
-                                <input class="w-4 h-4 float-left -ml-6 mt-1 rounded" type="checkbox"/>
-                                <label class="inline-block">Accept terms of service</label>
-                            </div>
-                            <button type="submit"
-                                    class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
-                                       hover:bg-purple-700"
-                            >
-                                Submit
-                            </button>
-                        </form>
+                    <template v-if="currentTab === AUTH_MODAL_TABS.REGISTER">
+                        <register-form></register-form>
                     </template>
                 </div>
             </div>
@@ -168,14 +96,18 @@
 <script>
 import { mapGetters } from "vuex";
 import { AUTH_MODAL_TABS } from "@/tools/constants";
+import RegisterForm from "@/components/forms/RegisterForm";
 
 export default {
-    name: "AppAuthModal",
+    name: "AuthModal",
+    components: {
+        RegisterForm,
+    },
     data() {
         return {
             AUTH_MODAL_TABS,
             currentTab: AUTH_MODAL_TABS.LOGIN,
-            modalId: "AppAuthModal",
+            modalId: "AuthModal",
         };
     },
     computed: {
