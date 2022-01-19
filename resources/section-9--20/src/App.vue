@@ -204,10 +204,10 @@
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader";
+import AppHeader from "@/components/layout/AppHeader";
 import AppIntroduction from "@/components/AppIntroduction";
 import AppPlayer from "@/components/AppPlayer";
-import AppAuthModal from "@/components/AppAuthModal";
+import AppAuthModal from "@/components/modals/AuthModal";
 
 export default {
     name: "App",

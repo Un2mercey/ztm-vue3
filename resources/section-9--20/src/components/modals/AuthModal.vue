@@ -84,17 +84,19 @@
                         </form>
                     </template>
 
-                    <template v-else>
-                        <form>
+                    <template v-if="currentTab === AUTH_MODAL_TABS.REGISTER">
+                        <vee-form>
                             <div class="mb-3">
                                 <label class="inline-block mb-2">
                                     Name
                                 </label>
-                                <input placeholder="Enter Name"
-                                       type="text"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
+                                <vee-field
+                                    type="text"
+                                    name="name"
+                                    placeholder="Enter Name"
+                                    class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
+                                           duration-500 focus:outline-none focus:border-black rounded"
+                                ></vee-field>
                             </div>
                             <div class="mb-3">
                                 <label class="inline-block mb-2">
@@ -157,7 +159,7 @@
                             >
                                 Submit
                             </button>
-                        </form>
+                        </vee-form>
                     </template>
                 </div>
             </div>
@@ -170,12 +172,12 @@ import { mapGetters } from "vuex";
 import { AUTH_MODAL_TABS } from "@/tools/constants";
 
 export default {
-    name: "AppAuthModal",
+    name: "AuthModal",
     data() {
         return {
             AUTH_MODAL_TABS,
             currentTab: AUTH_MODAL_TABS.LOGIN,
-            modalId: "AppAuthModal",
+            modalId: "AuthModal",
         };
     },
     computed: {
