@@ -1,66 +1,43 @@
 <template>
     <vee-form :validation-schema="validationSchema">
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Name
-            </label>
-            <vee-field
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                       duration-500 focus:outline-none focus:border-black rounded"
-                name="name"
-                placeholder="Enter Name"
-                type="text"
-            ></vee-field>
-            <vee-error-message name="name" class="text-red-600"></vee-error-message>
-        </div>
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Email
-            </label>
-            <input
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                       duration-500 focus:outline-none focus:border-black rounded"
-               placeholder="Enter Email"
-               type="email"
-            />
-        </div>
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Age
-            </label>
-            <input
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                       duration-500 focus:outline-none focus:border-black rounded"
-               type="number"
-            />
-        </div>
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Password
-            </label>
-            <input
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                      duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Password"
-                type="password"
-            />
-        </div>
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Confirm Password
-            </label>
-            <app-input
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                type="password"
-            ></app-input>
-        </div>
+        <app-field
+            name="name"
+            label="Name"
+            placeholder="Enter Name"
+            type="text"
+            v-model="name"
+        ></app-field>
+        <app-field
+            name="email"
+            label="Email"
+            placeholder="Enter Email"
+            type="email"
+            v-model="email"
+        ></app-field>
+        <app-field
+            name="age"
+            label="Age"
+            type="number"
+            v-model="age"
+        ></app-field>
+        <app-field
+            name="password"
+            label="Password"
+            type="password"
+            v-model="password"
+        ></app-field>
+        <app-field
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            v-model="confirmPassword"
+        ></app-field>
         <div class="mb-3">
             <label class="inline-block mb-2">
                 Country
             </label>
             <select class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                           duration-500 focus:outline-none focus:border-black rounded"
+                           duration-500 focus:outline-none focus:border-black rounded"
             >
                 <option value="USA">USA</option>
                 <option value="Mexico">Mexico</option>
@@ -72,7 +49,7 @@
             <label class="inline-block">Accept terms of service</label>
         </div>
         <button class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
-                                       hover:bg-purple-700"
+                       hover:bg-purple-700"
                 type="submit"
         >
             Submit
@@ -81,25 +58,32 @@
 </template>
 
 <script>
-import AppInput from "@/ui/AppInput";
+import AppField from "@/ui/AppField";
 
 export default {
     name: "RegisterForm",
     components: {
-        AppInput,
+        AppField,
     },
     data() {
         return {
             validationSchema: {
-                name: "required",
-                email: "",
+                name: "required|min:3|max:100|alphaSpaces",
+                email: "required|min:3|max:100|email",
                 age: "",
                 password: "",
                 confirmPassword: "",
                 country: "",
                 tos: "",
             },
+            name: "",
+            email: "",
+            age: "",
+            password: "",
+            confirmPassword: "",
         };
+    },
+    methods: {
     },
 };
 </script>

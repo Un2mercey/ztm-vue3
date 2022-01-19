@@ -4,7 +4,13 @@ import {
     ErrorMessage as VeeErrorMessage,
     defineRule,
 } from "vee-validate";
-import { required } from "@vee-validate/rules";
+import {
+    required,
+    min,
+    max,
+    email,
+    alpha_spaces as alphaSpaces,
+} from "@vee-validate/rules";
 
 const validation = {
     install(app) {
@@ -13,6 +19,10 @@ const validation = {
         app.component("VeeErrorMessage", VeeErrorMessage);
 
         defineRule("required", required);
+        defineRule("min", min);
+        defineRule("max", max);
+        defineRule("email", email);
+        defineRule("alphaSpaces", alphaSpaces);
     },
 };
 
