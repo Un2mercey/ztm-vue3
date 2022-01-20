@@ -7,12 +7,21 @@
             v-model="inputValue"
             :name="name"
             :placeholder="placeholder"
-            :type=type
-            as="input"
+            :as="type === 'select' ? 'select' : 'input'"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
                    transition duration-500 focus:outline-none focus:border-black rounded"
             @input="updateValue"
-        ></vee-field>
+        >
+            <template v-if="type === 'select'">
+                <option
+                    v-for="option in options"
+                    :key="option"
+                    :value="option"
+                >
+                    {{ option }}
+                </option>
+            </template>
+        </vee-field>
         <vee-error-message
             :name="name"
             as="div"
@@ -29,7 +38,7 @@ export default {
             type: String,
             required: true,
             validator(value) {
-                const regexp = new RegExp(/password|text|number|email/gm);
+                const regexp = new RegExp(/password|text|number|email|select/gm);
                 return regexp.test(value);
             },
         },
@@ -47,6 +56,10 @@ export default {
         label: {
             type: String,
             required: false,
+        },
+        options: {
+            type: Array,
+            default: () => [],
         },
     },
     data() {

@@ -32,21 +32,28 @@
             type="password"
             v-model="confirmPassword"
         ></app-field>
-        <div class="mb-3">
-            <label class="inline-block mb-2">
-                Country
-            </label>
-            <select class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                           duration-500 focus:outline-none focus:border-black rounded"
-            >
-                <option value="USA">USA</option>
-                <option value="Mexico">Mexico</option>
-                <option value="Germany">Germany</option>
-            </select>
-        </div>
+        <app-field
+            name="country"
+            label="Country"
+            type="select"
+            v-model="country"
+            :options="countryOptions"
+        ></app-field>
         <div class="mb-3 pl-6">
-            <input class="w-4 h-4 float-left -ml-6 mt-1 rounded" type="checkbox"/>
-            <label class="inline-block">Accept terms of service</label>
+            <vee-field
+                type="checkbox"
+                name="tos"
+                value="1"
+                class="w-4 h-4 float-left -ml-6 mt-1 rounded inline-block"
+            />
+            <label class="inline-block">
+                Accept terms of service
+            </label>
+            <vee-error-message
+                as="div"
+                name="tos"
+                class="text-red-600 block"
+            ></vee-error-message>
         </div>
         <button class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
                        hover:bg-purple-700"
@@ -73,14 +80,17 @@ export default {
                 age: "required|minValue:18|maxValue:100",
                 password: "required|min:6|max:100",
                 confirmPassword: "confirmed:@password",
-                country: "",
-                tos: "",
+                country: "required|excluded:Choose a country",
+                tos: "required",
             },
             name: "",
             email: "",
             age: "",
             password: "",
             confirmPassword: "",
+            country: "",
+            countryOptions: ["Choose a country", "USA", "Mexico", "Germany"],
+            tos: 1,
         };
     },
     methods: {
