@@ -53,6 +53,10 @@ const validation = {
 
                 return messages[ctx.rule.name] || `The field "${ctx.field}" is invalid.`;
             },
+            validateOnBlur: true,
+            validateOnChange: true,
+            validateOnInput: false,
+            validateOnModelUpdate: true,
         });
     },
 };
