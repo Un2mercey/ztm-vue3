@@ -3,3 +3,7 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.router-link-active {
+  @apply text-yellow-500;
+}
