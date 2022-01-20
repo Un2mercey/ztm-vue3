@@ -1,51 +1,47 @@
 <template>
-    <vee-form :validation-schema="validationSchema">
-        <app-field
+    <vee-form
+        :validation-schema="validationSchema"
+        @submit="register"
+    >
+        <app-input-field
             name="name"
             label="Name"
             placeholder="Enter Name"
             type="text"
-            v-model="name"
-        ></app-field>
-        <app-field
+        ></app-input-field>
+        <app-input-field
             name="email"
             label="Email"
             placeholder="Enter Email"
             type="email"
-            v-model="email"
-        ></app-field>
-        <app-field
+        ></app-input-field>
+        <app-input-field
             name="age"
             label="Age"
             type="number"
-            v-model="age"
-        ></app-field>
-        <app-field
+        ></app-input-field>
+        <app-input-field
             name="password"
             label="Password"
             type="password"
-            v-model="password"
-        ></app-field>
-        <app-field
+        ></app-input-field>
+        <app-input-field
             name="confirmPassword"
             label="Confirm Password"
             type="password"
-            v-model="confirmPassword"
-        ></app-field>
-        <app-field
+        ></app-input-field>
+        <app-select-field
             name="country"
             label="Country"
-            type="select"
-            v-model="country"
             :options="countryOptions"
-        ></app-field>
+        ></app-select-field>
         <div class="mb-3 pl-6">
             <vee-field
                 type="checkbox"
                 name="tos"
                 value="1"
                 class="w-4 h-4 float-left -ml-6 mt-1 rounded inline-block"
-            />
+            ></vee-field>
             <label class="inline-block">
                 Accept terms of service
             </label>
@@ -65,12 +61,14 @@
 </template>
 
 <script>
-import AppField from "@/ui/AppField";
+import AppInputField from "@/ui/AppInputField";
+import AppSelectField from "@/ui/AppSelectField";
 
 export default {
     name: "RegisterForm",
     components: {
-        AppField,
+        AppInputField,
+        AppSelectField,
     },
     data() {
         return {
@@ -94,6 +92,9 @@ export default {
         };
     },
     methods: {
+        register(values) {
+            console.log(values);
+        },
     },
 };
 </script>
