@@ -13,6 +13,7 @@ import {
     min_value as minValue,
     max_value as maxValue,
     alpha_spaces as alphaSpaces,
+    not_one_of as excluded,
 } from "@vee-validate/rules";
 
 const validation = {
@@ -29,6 +30,7 @@ const validation = {
         defineRule("minValue", minValue);
         defineRule("maxValue", maxValue);
         defineRule("alphaSpaces", alphaSpaces);
+        defineRule("excluded", excluded);
     },
 };
 
