@@ -52,9 +52,11 @@
                 class="text-red-600 block"
             ></vee-error-message>
         </div>
-        <button class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
-                       hover:bg-purple-700"
-                type="submit"
+        <button
+            type="submit"
+            :disabled="isLoading"
+            class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
+                   hover:bg-purple-700"
         >
             Submit
         </button>
@@ -71,6 +73,13 @@ export default {
         AppInputField,
         AppSelectField,
     },
+    props: {
+        isLoading: {
+            type: Boolean,
+            required: true,
+        },
+    },
+    emits: ["registration"],
     data() {
         return {
             validationSchema: {
@@ -111,7 +120,7 @@ export default {
     },
     methods: {
         register(values) {
-            console.log(values);
+            this.$emit("registration", values);
         },
     },
 };
