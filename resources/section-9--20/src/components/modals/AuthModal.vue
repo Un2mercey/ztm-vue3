@@ -52,41 +52,8 @@
                         </li>
                     </ul>
 
-                    <template v-if="currentTab === AUTH_MODAL_TABS.LOGIN">
-                        <form>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    placeholder="Enter Email"
-                                    type="email"
-                                    class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                       duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-block mb-2">
-                                    Password
-                                </label>
-                                <input placeholder="Password"
-                                       type="password"
-                                       class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                                          duration-500 focus:outline-none focus:border-black rounded"
-                                />
-                            </div>
-                            <button type="submit"
-                                    class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
-                                       hover:bg-purple-700"
-                            >
-                                Submit
-                            </button>
-                        </form>
-                    </template>
-
-                    <template v-if="currentTab === AUTH_MODAL_TABS.REGISTER">
-                        <register-form></register-form>
-                    </template>
+                    <login-form v-if="currentTab === AUTH_MODAL_TABS.LOGIN"></login-form>
+                    <register-form v-if="currentTab === AUTH_MODAL_TABS.REGISTER"></register-form>
                 </div>
             </div>
         </div>
@@ -97,11 +64,13 @@
 import { mapGetters } from "vuex";
 import { AUTH_MODAL_TABS } from "@/tools/constants";
 import RegisterForm from "@/components/forms/RegisterForm";
+import LoginForm from "@/components/forms/LoginForm";
 
 export default {
     name: "AuthModal",
     components: {
         RegisterForm,
+        LoginForm,
     },
     data() {
         return {

@@ -13,9 +13,10 @@
             <option
                 v-for="option in options"
                 :key="option"
-                :value="option"
+                :value="option.name"
+                :disabled="option.isDisabled"
             >
-                {{ option }}
+                {{ option.name }}
             </option>
         </vee-field>
         <vee-error-message
