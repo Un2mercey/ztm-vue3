@@ -78,9 +78,9 @@ export default {
                 email: "required|min:3|max:100|email",
                 age: "required|minValue:18|maxValue:100",
                 password: "required|min:6|max:100",
-                confirmPassword: "confirmed:@password",
-                country: "required|excluded:Choose a country",
-                tos: "required",
+                confirmPassword: "passwordMismatch:@password",
+                country: "required|countryExcluded:Russian federation",
+                tos: "tos",
             },
             countryOptions: [
                 {
@@ -97,6 +97,10 @@ export default {
                 },
                 {
                     name: "Germany",
+                    isDisabled: false,
+                },
+                {
+                    name: "Russian federation",
                     isDisabled: false,
                 },
             ],
