@@ -1,6 +1,7 @@
 <template>
     <vee-form
         :validation-schema="validationSchema"
+        :initial-values="userData"
         @submit="register"
     >
         <app-input-field
@@ -81,14 +82,27 @@ export default {
                 country: "required|excluded:Choose a country",
                 tos: "required",
             },
-            name: "",
-            email: "",
-            age: "",
-            password: "",
-            confirmPassword: "",
-            country: "",
-            countryOptions: ["Choose a country", "USA", "Mexico", "Germany"],
-            tos: 1,
+            countryOptions: [
+                {
+                    name: "Choose a country",
+                    isDisabled: true,
+                },
+                {
+                    name: "USA",
+                    isDisabled: false,
+                },
+                {
+                    name: "Mexico",
+                    isDisabled: false,
+                },
+                {
+                    name: "Germany",
+                    isDisabled: false,
+                },
+            ],
+            userData: {
+                country: "USA",
+            },
         };
     },
     methods: {
