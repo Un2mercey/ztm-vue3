@@ -5,17 +5,24 @@
         </label>
         <vee-field
             :name="name"
-            :placeholder="placeholder"
-            as="input"
-            :type="type"
-            class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
-                   transition duration-500 focus:outline-none focus:border-black rounded"
-        ></vee-field>
-        <vee-error-message
-            :name="name"
-            as="div"
-            class="text-red-600"
-        ></vee-error-message>
+            :bails="false"
+            #="{ field, errors }"
+        >
+            <input
+                :placeholder="placeholder"
+                :type="type"
+                v-bind="field"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300
+                       transition duration-500 focus:outline-none focus:border-black rounded"
+            />
+            <div
+                v-for="error in errors"
+                :key="error"
+                class="text-red-600"
+            >
+                {{ error }}
+            </div>
+        </vee-field>
     </div>
 </template>
 
