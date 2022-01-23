@@ -1,13 +1,39 @@
 import Vuex from "vuex";
 import auth from "./modules/auth";
 import modal from "./modules/modal";
+import * as types from "./mutatuion-types";
+import getAlertStyle from "@/tools/alert-style";
 
 const debug = process.env.NODE_ENV !== "production";
 
-const state = {};
-const actions = {};
-const getters = {};
-const mutations = {};
+const state = {
+    alert: {},
+};
+
+const getters = {
+    getAlert: (state) => state.alert,
+};
+
+const mutations = {
+    [types.SET_ALERT](state, { type, message }) {
+        state.alert = {
+            message,
+            style: getAlertStyle(type),
+        };
+    },
+    [types.RESET_ALERT](state) {
+        state.alert = {};
+    },
+};
+
+const actions = {
+    setAlert: ({ commit }, payload) => {
+        commit(types.SET_ALERT, payload);
+    },
+    resetAlert: ({ commit }) => {
+        commit(types.RESET_ALERT);
+    },
+};
 
 export default new Vuex.Store({
     state,
