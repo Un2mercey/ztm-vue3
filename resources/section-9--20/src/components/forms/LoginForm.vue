@@ -1,11 +1,6 @@
 <template>
     <div>
-        <app-alert
-            v-if="showAlert"
-            :variant="alertVariant"
-        >
-            {{ alertMessage }}
-        </app-alert>
+        <app-alert v-if="showAlert"></app-alert>
         <vee-form
             :validation-schema="validationSchema"
             @submit="login"
@@ -35,6 +30,7 @@
 <script>
 import AppInputField from "@/ui/AppInputField";
 import AppAlert from "@/components/AppAlert";
+import { ALERT_TYPE } from "@/tools/constants";
 
 export default {
     name: "LoginForm",
@@ -50,21 +46,24 @@ export default {
             },
             isLoading: false,
             showAlert: false,
-            alertVariant: "bg-blue-500",
-            alertMessage: "Please wait! We are logging you in.",
         };
     },
     methods: {
         login(formData) {
             console.log("login", formData);
-            this.alertVariant = "bg-blue-500";
-            this.alertMessage = "Please wait! We are logging you in.";
             this.showAlert = true;
             this.isLoading = true;
 
+            this.$store.dispatch("setAlert", {
+                type: ALERT_TYPE.PENDING,
+                message: "Please wait! We are logging you in.",
+            });
+
             setTimeout(() => {
-                this.alertVariant = "bg-green-500";
-                this.alertMessage = "Success! You are now logged in.";
+                this.$store.dispatch("setAlert", {
+                    type: ALERT_TYPE.SUCCESS,
+                    message: "Success! You are now logged in.",
+                });
             }, 3000);
         },
     },

@@ -1,11 +1,6 @@
 <template>
     <div>
-        <app-alert
-            v-if="showAlert"
-            :variant="alertVariant"
-        >
-            {{ alertMessage }}
-        </app-alert>
+        <app-alert v-if="showAlert"></app-alert>
         <vee-form
             :validation-schema="validationSchema"
             :initial-values="userData"
@@ -75,6 +70,7 @@
 import AppInputField from "@/ui/AppInputField";
 import AppSelectField from "@/ui/AppSelectField";
 import AppAlert from "@/components/AppAlert";
+import { ALERT_TYPE } from "@/tools/constants";
 
 export default {
     name: "RegisterForm",
@@ -84,8 +80,38 @@ export default {
         AppAlert,
     },
     data() {
+        const validationSchema = this.getValidationSchema();
+        const countryOptions = this.getCountryOptions();
         return {
-            validationSchema: {
+            validationSchema,
+            countryOptions,
+            userData: {
+                country: "USA",
+            },
+            isLoading: false,
+            showAlert: false,
+        };
+    },
+    methods: {
+        async register(formData) {
+            this.showAlert = true;
+            this.isLoading = true;
+            this.$store.dispatch("setAlert", {
+                type: ALERT_TYPE.PENDING,
+                message: "Please wait! Your account is being created.",
+            });
+
+            try {
+                const response = await this.$store.dispatch("register", formData);
+                console.log(response);
+            } catch (errors) {
+                console.log(errors);
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        getValidationSchema() {
+            return {
                 name: "required|min:3|max:100|alphaSpaces",
                 email: "required|min:3|max:100|email",
                 age: "required|minValue:18|maxValue:100",
@@ -93,8 +119,10 @@ export default {
                 confirmPassword: "passwordMismatch:@password",
                 country: "required|countryExcluded:Russian federation",
                 tos: "tos",
-            },
-            countryOptions: [
+            };
+        },
+        getCountryOptions() {
+            return [
                 {
                     name: "Choose a country",
                     isDisabled: true,
@@ -115,28 +143,7 @@ export default {
                     name: "Russian federation",
                     isDisabled: false,
                 },
-            ],
-            userData: {
-                country: "USA",
-            },
-            isLoading: false,
-            showAlert: false,
-            alertVariant: "bg-blue-500",
-            alertMessage: "Please wait! Your account is being created.",
-        };
-    },
-    methods: {
-        register(formData) {
-            console.log("onRegistration", formData);
-            this.alertVariant = "bg-blue-500";
-            this.alertMessage = "Please wait! Your account is being created.";
-            this.showAlert = true;
-            this.isLoading = true;
-
-            setTimeout(() => {
-                this.alertVariant = "bg-green-500";
-                this.alertMessage = "Success! Your account has been created.";
-            }, 3000);
+            ];
         },
     },
 };

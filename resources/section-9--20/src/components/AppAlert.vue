@@ -1,20 +1,21 @@
 <template>
     <div
         class="text-white text-center font-bold p-5 mb-4"
-        :class="variant"
+        :class="alert.style"
     >
-        <slot></slot>
+        {{ alert.message }}
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
     name: "AppAlert",
-    props: {
-        variant: {
-            type: String,
-            default: "",
-        },
+    computed: {
+        ...mapGetters({
+            alert: "getAlert",
+        }),
     },
 };
 </script>
