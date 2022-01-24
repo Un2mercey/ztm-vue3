@@ -63,7 +63,7 @@ export default {
                 setTimeout(() => {
                     this.showAlert = false;
                     this.$store.dispatch("closeModal");
-                }, 1000);
+                }, 500);
             } catch (e) {
                 console.error(e);
             } finally {

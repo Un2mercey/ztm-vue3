@@ -100,6 +100,10 @@ const actions = {
             }
         });
     },
+    async signOut({ commit }) {
+        await auth.signOut();
+        commit(types.SET_USER, null);
+    },
 };
 
 export default {
