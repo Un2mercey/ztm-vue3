@@ -49,8 +49,7 @@ export default {
         };
     },
     methods: {
-        login(formData) {
-            console.log("login", formData);
+        async login(formData) {
             this.showAlert = true;
             this.isLoading = true;
 
@@ -59,12 +58,17 @@ export default {
                 message: "Please wait! We are logging you in.",
             });
 
-            setTimeout(() => {
-                this.$store.dispatch("setAlert", {
-                    type: ALERT_TYPE.SUCCESS,
-                    message: "Success! You are now logged in.",
-                });
-            }, 3000);
+            try {
+                await this.$store.dispatch("login", formData);
+                setTimeout(() => {
+                    this.showAlert = false;
+                    this.$store.dispatch("closeModal");
+                }, 1000);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                this.isLoading = false;
+            }
         },
     },
 };

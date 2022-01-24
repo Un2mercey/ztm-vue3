@@ -74,6 +74,32 @@ const actions = {
             commit(types.SET_USER, auth.currentUser);
         }
     },
+    async login({ commit }, { email, password }) {
+        let errorResponse;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            commit(types.SET_USER, auth.currentUser);
+            commit(types.SET_ALERT, {
+                type: ALERT_TYPE.SUCCESS,
+                message: "Success! Your are now logged in.",
+            });
+        } catch (errors) {
+            errorResponse = errors;
+            commit(types.SET_ALERT, {
+                type: ALERT_TYPE.ERROR,
+                message: "Invalid login details.",
+            });
+        }
+
+        return new Promise((resolve, reject) => {
+            if (errorResponse !== undefined) {
+                reject(errorResponse);
+            } else {
+                resolve();
+            }
+        });
+    },
 };
 
 export default {

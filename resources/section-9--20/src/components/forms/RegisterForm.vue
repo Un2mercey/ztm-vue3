@@ -109,6 +109,10 @@ export default {
             });
             try {
                 await this.$store.dispatch("register", formData);
+                setTimeout(() => {
+                    this.showAlert = false;
+                    this.$store.dispatch("closeModal");
+                }, 1000);
             } catch (e) {
                 console.error(e);
             } finally {
