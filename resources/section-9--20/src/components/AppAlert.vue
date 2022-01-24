@@ -1,7 +1,7 @@
 <template>
     <div
-        class="text-white text-center font-bold p-5 mb-4"
         :class="alert.style"
+        class="text-white text-center font-bold p-5 mb-4"
     >
         {{ alert.message }}
     </div>

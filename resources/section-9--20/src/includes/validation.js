@@ -34,6 +34,7 @@ const validation = {
         defineRule("alphaSpaces", alphaSpaces);
         defineRule("excluded", excluded);
         defineRule("countryExcluded", excluded);
+        defineRule("favoriteArtistExcluded", excluded);
 
         configure({
             generateMessage: (ctx) => {
@@ -48,6 +49,7 @@ const validation = {
                     alphaSpaces: `The field "${ctx.field}" may only alphabetical character and spaces`,
                     excluded: `You are not allowed to use this value for the "${ctx.field}"`,
                     countryExcluded: "Due to restrictions, we do not accept users from this location.",
+                    favoriteArtistExcluded: "Please, pick anyone but them.",
                     tos: "You must accept the Terms of Service.",
                 };
 

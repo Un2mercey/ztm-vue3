@@ -38,6 +38,11 @@
                 label="Country"
                 :options="countryOptions"
             ></app-select-field>
+            <app-select-field
+                name="favoriteArtist"
+                label="Favorite Artist"
+                :options="artistList"
+            ></app-select-field>
             <div class="mb-3 pl-6">
                 <vee-field
                     type="checkbox"
@@ -82,9 +87,11 @@ export default {
     data() {
         const validationSchema = this.getValidationSchema();
         const countryOptions = this.getCountryOptions();
+        const artistList = this.getArtistList();
         return {
             validationSchema,
             countryOptions,
+            artistList,
             userData: {
                 country: "USA",
             },
@@ -100,12 +107,14 @@ export default {
                 type: ALERT_TYPE.PENDING,
                 message: "Please wait! Your account is being created.",
             });
-
             try {
-                const response = await this.$store.dispatch("register", formData);
-                console.log(response);
-            } catch (errors) {
-                console.log(errors);
+                await this.$store.dispatch("register", formData);
+                setTimeout(() => {
+                    this.showAlert = false;
+                    this.$store.dispatch("closeModal");
+                }, 500);
+            } catch (e) {
+                console.error(e);
             } finally {
                 this.isLoading = false;
             }
@@ -118,6 +127,7 @@ export default {
                 password: "required|min:6|max:100",
                 confirmPassword: "passwordMismatch:@password",
                 country: "required|countryExcluded:Russian federation",
+                favoriteArtist: "favoriteArtistExcluded:BTS",
                 tos: "tos",
             };
         },
@@ -141,6 +151,46 @@ export default {
                 },
                 {
                     name: "Russian federation",
+                    isDisabled: false,
+                },
+            ];
+        },
+        getArtistList() {
+            return [
+                {
+                    name: "Choose your favorite artist",
+                    isDisabled: true,
+                },
+                {
+                    name: "Skrillex",
+                    isDisabled: false,
+                },
+                {
+                    name: "BTS",
+                    isDisabled: false,
+                },
+                {
+                    name: "Martin Garrix",
+                    isDisabled: false,
+                },
+                {
+                    name: "Tiesto",
+                    isDisabled: false,
+                },
+                {
+                    name: "Powerwolf",
+                    isDisabled: false,
+                },
+                {
+                    name: "Lady Gaga",
+                    isDisabled: false,
+                },
+                {
+                    name: "Depeche Mode",
+                    isDisabled: false,
+                },
+                {
+                    name: "Caravan Palace",
                     isDisabled: false,
                 },
             ];
