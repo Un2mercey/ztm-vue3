@@ -1,7 +1,7 @@
 import * as types from "../mutatuion-types";
 
 const state = {
-    user: {},
+    user: null,
 };
 
 const getters = {

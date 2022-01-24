@@ -217,5 +217,8 @@ export default {
         AppPlayer,
         AppAuthModal,
     },
+    created() {
+        this.$store.dispatch("initLogin");
+    },
 };
 </script>

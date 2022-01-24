@@ -20,7 +20,7 @@ const actions = {
 
         try {
             const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
-            const response = await dispatch("setUserCredentials", {
+            await dispatch("setUserCredentials", {
                 uid: userCredentials.user.uid,
                 name,
                 email,
@@ -32,7 +32,7 @@ const actions = {
                 user: userCredentials.user,
                 name,
             });
-            commit(types.SET_USER, response);
+            commit(types.SET_USER, auth.currentUser);
             commit(types.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your account has been created.",
@@ -68,6 +68,11 @@ const actions = {
         return user.updateProfile({
             displayName: name,
         });
+    },
+    initLogin({ commit }) {
+        if (auth.currentUser) {
+            commit(types.SET_USER, auth.currentUser);
+        }
     },
 };
 
