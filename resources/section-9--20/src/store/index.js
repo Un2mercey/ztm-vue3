@@ -1,7 +1,8 @@
 import Vuex from "vuex";
+import * as types from "./mutatuion-types";
 import auth from "./modules/auth";
 import modal from "./modules/modal";
-import * as types from "./mutatuion-types";
+import users from "@/store/modules/users";
 import getAlertStyle from "@/tools/alert-style";
 
 const debug = process.env.NODE_ENV !== "production";
@@ -40,6 +41,7 @@ export default new Vuex.Store({
     modules: {
         auth,
         modal,
+        users,
     },
     actions,
     getters,

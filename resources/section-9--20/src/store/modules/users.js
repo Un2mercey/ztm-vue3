@@ -16,7 +16,6 @@ const mutations = {
 
 const actions = {
     setUser({ commit }, payload) {
-        console.log(payload);
         commit(types.SET_USER, payload);
     },
 };

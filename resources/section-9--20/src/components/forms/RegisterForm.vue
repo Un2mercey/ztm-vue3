@@ -100,12 +100,8 @@ export default {
                 type: ALERT_TYPE.PENDING,
                 message: "Please wait! Your account is being created.",
             });
-
             try {
-                const response = await this.$store.dispatch("register", formData);
-                console.log(response);
-            } catch (errors) {
-                console.log(errors);
+                await this.$store.dispatch("register", formData);
             } finally {
                 this.isLoading = false;
             }

@@ -1,5 +1,6 @@
-import { auth } from "@/includes/firebase";
 import * as types from "../mutatuion-types";
+import { auth } from "@/includes/firebase";
+import usersCollection from "@/includes/firebase-collections";
 import { ALERT_TYPE } from "@/tools/constants";
 
 const state = {
@@ -12,13 +13,19 @@ const mutations = {
 };
 
 const actions = {
-    async register({ commit }, { email, password }) {
-        let response;
+    async register({ commit, dispatch }, {
+        email, password, name, age, country,
+    }) {
         let errorResponse;
 
         try {
-            response = await auth.createUserWithEmailAndPassword(email, password);
-
+            await auth.createUserWithEmailAndPassword(email, password);
+            const response = await dispatch("addUserCredentials", {
+                name,
+                email,
+                age,
+                country,
+            });
             commit(types.SET_USER, response);
             commit(types.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
@@ -33,12 +40,21 @@ const actions = {
         }
 
         return new Promise((resolve, reject) => {
-            if (response !== undefined) {
-                resolve(response);
-            }
             if (errorResponse !== undefined) {
                 reject(errorResponse);
+            } else {
+                resolve();
             }
+        });
+    },
+    async addUserCredentials(context, {
+        name, email, age, country,
+    }) {
+        return usersCollection.add({
+            name,
+            email,
+            age,
+            country,
         });
     },
 };
