@@ -19,13 +19,18 @@ const actions = {
         let errorResponse;
 
         try {
-            await auth.createUserWithEmailAndPassword(email, password);
-            const response = await dispatch("addUserCredentials", {
+            const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
+            const response = await dispatch("setUserCredentials", {
+                uid: userCredentials.user.uid,
                 name,
                 email,
                 age,
                 country,
                 favoriteArtist,
+            });
+            await dispatch("updateUserProfile", {
+                user: userCredentials.user,
+                name,
             });
             commit(types.SET_USER, response);
             commit(types.SET_ALERT, {
@@ -48,15 +53,20 @@ const actions = {
             }
         });
     },
-    addUserCredentials(context, {
-        name, email, age, country, favoriteArtist,
+    setUserCredentials(context, {
+        uid, name, email, age, country, favoriteArtist,
     }) {
-        return usersCollection.add({
+        return usersCollection.doc(uid).set({
             name,
             email,
             age,
             country,
             favoriteArtist,
+        });
+    },
+    updateUserProfile(context, { user, name }) {
+        return user.updateProfile({
+            displayName: name,
         });
     },
 };
