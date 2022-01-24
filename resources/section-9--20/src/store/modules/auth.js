@@ -14,7 +14,7 @@ const mutations = {
 
 const actions = {
     async register({ commit, dispatch }, {
-        email, password, name, age, country,
+        email, password, name, age, country, favoriteArtist,
     }) {
         let errorResponse;
 
@@ -25,6 +25,7 @@ const actions = {
                 email,
                 age,
                 country,
+                favoriteArtist,
             });
             commit(types.SET_USER, response);
             commit(types.SET_ALERT, {
@@ -47,14 +48,15 @@ const actions = {
             }
         });
     },
-    async addUserCredentials(context, {
-        name, email, age, country,
+    addUserCredentials(context, {
+        name, email, age, country, favoriteArtist,
     }) {
         return usersCollection.add({
             name,
             email,
             age,
             country,
+            favoriteArtist,
         });
     },
 };
