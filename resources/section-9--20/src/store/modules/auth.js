@@ -20,6 +20,8 @@ const actions = {
             response = await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password);
+
+            commit(types.SET_USER, response);
             commit(types.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your account has been created.",
