@@ -1,4 +1,4 @@
-import firebase from "@/includes/firebase";
+import { auth } from "@/includes/firebase";
 import * as types from "../mutatuion-types";
 import { ALERT_TYPE } from "@/tools/constants";
 
@@ -17,9 +17,7 @@ const actions = {
         let errorResponse;
 
         try {
-            response = await firebase
-                .auth()
-                .createUserWithEmailAndPassword(email, password);
+            response = await auth.createUserWithEmailAndPassword(email, password);
 
             commit(types.SET_USER, response);
             commit(types.SET_ALERT, {
