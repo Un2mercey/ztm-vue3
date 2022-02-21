@@ -1,26 +1,19 @@
-import * as types from "../mutatuion-types";
 import { auth } from "@/includes/firebase";
-import usersCollection from "@/includes/firebase-collections";
 import { ALERT_TYPE } from "@/tools/constants";
-
-const state = {
-};
-
-const getters = {
-};
-
-const mutations = {
-};
+import AUTH_ACTION_TYPE from "./action-types";
+import USER_MUTATION_TYPE from "../user/mutation-types";
+import ALERT_MUTATION_TYPE from "../alert/mutation-types";
+import usersCollection from "@/includes/firebase-collections";
 
 const actions = {
-    async register({ commit, dispatch }, {
+    async [AUTH_ACTION_TYPE.REGISTER]({ commit, dispatch }, {
         email, password, name, age, country, favoriteArtist,
     }) {
         let errorResponse;
 
         try {
             const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
-            await dispatch("setUserCredentials", {
+            await dispatch(AUTH_ACTION_TYPE.SET_USER_CREDENTIALS, {
                 uid: userCredentials.user.uid,
                 name,
                 email,
@@ -28,18 +21,18 @@ const actions = {
                 country,
                 favoriteArtist,
             });
-            await dispatch("updateUserProfile", {
+            await dispatch(AUTH_ACTION_TYPE.UPDATE_USER_PROFILE, {
                 user: userCredentials.user,
                 name,
             });
-            commit(types.SET_USER, auth.currentUser);
-            commit(types.SET_ALERT, {
+            commit(USER_MUTATION_TYPE.SET_USER, auth.currentUser);
+            commit(ALERT_MUTATION_TYPE.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your account has been created.",
             });
         } catch (errors) {
             errorResponse = errors;
-            commit(types.SET_ALERT, {
+            commit(ALERT_MUTATION_TYPE.SET_ALERT, {
                 type: ALERT_TYPE.ERROR,
                 message: "An unexpected error occurred. Please try again later.",
             });
@@ -53,7 +46,7 @@ const actions = {
             }
         });
     },
-    setUserCredentials(context, {
+    [AUTH_ACTION_TYPE.SET_USER_CREDENTIALS](context, {
         uid, name, email, age, country, favoriteArtist,
     }) {
         return usersCollection.doc(uid).set({
@@ -64,29 +57,29 @@ const actions = {
             favoriteArtist,
         });
     },
-    updateUserProfile(context, { user, name }) {
+    [AUTH_ACTION_TYPE.UPDATE_USER_PROFILE](context, { user, name }) {
         return user.updateProfile({
             displayName: name,
         });
     },
-    initLogin({ commit }) {
+    [AUTH_ACTION_TYPE.INIT_LOGIN]({ commit }) {
         if (auth.currentUser) {
-            commit(types.SET_USER, auth.currentUser);
+            commit(USER_MUTATION_TYPE.SET_USER, auth.currentUser);
         }
     },
-    async login({ commit }, { email, password }) {
+    async [AUTH_ACTION_TYPE.LOGIN]({ commit }, { email, password }) {
         let errorResponse;
 
         try {
             await auth.signInWithEmailAndPassword(email, password);
-            commit(types.SET_USER, auth.currentUser);
-            commit(types.SET_ALERT, {
+            commit(USER_MUTATION_TYPE.SET_USER, auth.currentUser);
+            commit(ALERT_MUTATION_TYPE.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your are now logged in.",
             });
         } catch (errors) {
             errorResponse = errors;
-            commit(types.SET_ALERT, {
+            commit(ALERT_MUTATION_TYPE.SET_ALERT, {
                 type: ALERT_TYPE.ERROR,
                 message: "Invalid login details.",
             });
@@ -100,15 +93,10 @@ const actions = {
             }
         });
     },
-    async signOut({ commit }) {
+    async [AUTH_ACTION_TYPE.SIGN_OUT]({ commit }) {
         await auth.signOut();
-        commit(types.SET_USER, null);
+        commit(USER_MUTATION_TYPE.SET_USER, null);
     },
 };
 
-export default {
-    state,
-    actions,
-    getters,
-    mutations,
-};
+export default actions;
