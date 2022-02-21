@@ -52,8 +52,8 @@
                         </li>
                     </ul>
 
-                    <login-form v-if="currentTab === AUTH_MODAL_TABS.LOGIN"></login-form>
-                    <register-form v-if="currentTab === AUTH_MODAL_TABS.REGISTER"></register-form>
+                    <LoginForm v-if="currentTab === AUTH_MODAL_TABS.LOGIN"/>
+                    <RegisterForm v-if="currentTab === AUTH_MODAL_TABS.REGISTER"/>
                 </div>
             </div>
         </div>
@@ -65,6 +65,8 @@ import { mapGetters } from "vuex";
 import { AUTH_MODAL_TABS } from "@/tools/constants";
 import RegisterForm from "@/components/forms/RegisterForm";
 import LoginForm from "@/components/forms/LoginForm";
+import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
+import MODAL_GETTER_TYPE from "@/store/modules/modal/getter-types";
 
 export default {
     name: "AuthModal",
@@ -81,8 +83,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            modalName: "getModalName",
-            modalIsOpen: "getModalIsOpen",
+            modalName: MODAL_GETTER_TYPE.GET_MODAL_NAME,
+            modalIsOpen: MODAL_GETTER_TYPE.GET_MODAL_IS_OPEN,
         }),
         isVisible() {
             return this.modalIsOpen && this.modalName === this.modalId;
@@ -90,7 +92,7 @@ export default {
     },
     methods: {
         closeModal() {
-            this.$store.dispatch("closeModal");
+            this.$store.dispatch(MODAL_ACTION_TYPE.CLOSE_MODAL);
         },
         switchTab(tab) {
             this.currentTab = tab;

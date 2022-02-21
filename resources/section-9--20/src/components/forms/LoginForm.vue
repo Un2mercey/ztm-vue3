@@ -1,20 +1,20 @@
 <template>
     <div>
-        <app-alert v-if="showAlert"></app-alert>
-        <vee-form
+        <AppAlert v-if="showAlert"/>
+        <VeeForm
             :validation-schema="validationSchema"
             @submit="login"
         >
-            <app-input-field
+            <AppInputField
                 name="email"
                 label="Email"
                 type="email"
-            ></app-input-field>
-            <app-input-field
+            />
+            <AppInputField
                 name="password"
                 label="Password"
                 type="password"
-            ></app-input-field>
+            />
             <button
                 type="submit"
                 :disabled="isLoading"
@@ -23,14 +23,17 @@
             >
                 Login
             </button>
-        </vee-form>
+        </VeeForm>
     </div>
 </template>
 
 <script>
 import AppInputField from "@/ui/AppInputField";
 import AppAlert from "@/components/AppAlert";
+import ALERT_ACTION_TYPE from "@/store/modules/alert/action-types";
+import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
 import { ALERT_TYPE } from "@/tools/constants";
+import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
 
 export default {
     name: "LoginForm",
@@ -52,17 +55,16 @@ export default {
         async login(formData) {
             this.showAlert = true;
             this.isLoading = true;
-
-            this.$store.dispatch("setAlert", {
+            this.$store.dispatch(ALERT_ACTION_TYPE.SET_ALERT, {
                 type: ALERT_TYPE.PENDING,
                 message: "Please wait! We are logging you in.",
             });
 
             try {
-                await this.$store.dispatch("login", formData);
+                await this.$store.dispatch(AUTH_ACTION_TYPE.LOGIN, formData);
                 setTimeout(() => {
                     this.showAlert = false;
-                    this.$store.dispatch("closeModal");
+                    this.$store.dispatch(MODAL_ACTION_TYPE.CLOSE_MODAL);
                 }, 500);
             } catch (e) {
                 console.error(e);

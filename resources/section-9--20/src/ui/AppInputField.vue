@@ -3,7 +3,7 @@
         <label class="inline-block mb-2">
             {{ label }}
         </label>
-        <vee-field
+        <VeeField
             :name="name"
             :bails="false"
             #="{ field, errors }"
@@ -22,7 +22,7 @@
             >
                 {{ error }}
             </div>
-        </vee-field>
+        </VeeField>
     </div>
 </template>
 

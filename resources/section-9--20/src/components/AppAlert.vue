@@ -9,12 +9,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import ALERT_GETTER_TYPE from "@/store/modules/alert/getter-types";
 
 export default {
     name: "AppAlert",
     computed: {
         ...mapGetters({
-            alert: "getAlert",
+            alert: ALERT_GETTER_TYPE.GET_ALERT,
         }),
     },
 };

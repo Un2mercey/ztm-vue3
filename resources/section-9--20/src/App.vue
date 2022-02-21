@@ -1,6 +1,6 @@
 <template>
-    <app-header></app-header>
-    <app-introduction></app-introduction>
+    <AppHeader/>
+    <AppIntroduction/>
 
     <!-- Main Content -->
     <section class="container mx-auto">
@@ -199,8 +199,8 @@
         </div>
     </section>
 
-    <app-player></app-player>
-    <app-auth-modal></app-auth-modal>
+    <AppPlayer/>
+    <AppAuthModal/>
 </template>
 
 <script>
@@ -208,6 +208,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import AppIntroduction from "@/components/AppIntroduction";
 import AppPlayer from "@/components/AppPlayer";
 import AppAuthModal from "@/components/modals/AuthModal";
+import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
 
 export default {
     name: "App",
@@ -218,7 +219,7 @@ export default {
         AppAuthModal,
     },
     created() {
-        this.$store.dispatch("initLogin");
+        this.$store.dispatch(AUTH_ACTION_TYPE.INIT_LOGIN);
     },
 };
 </script>

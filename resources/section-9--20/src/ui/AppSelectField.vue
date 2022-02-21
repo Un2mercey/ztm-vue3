@@ -3,7 +3,7 @@
         <label class="inline-block mb-2">
             {{ label }}
         </label>
-        <vee-field
+        <VeeField
             :name="name"
             :placeholder="placeholder"
             as="select"
@@ -18,12 +18,12 @@
             >
                 {{ option.name }}
             </option>
-        </vee-field>
-        <vee-error-message
+        </VeeField>
+        <VeeErrorMessage
             :name="name"
             as="div"
             class="text-red-600"
-        ></vee-error-message>
+        />
     </div>
 </template>
 

@@ -39,12 +39,15 @@
 
 <script>
 import { mapGetters } from "vuex";
+import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
+import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
+import USER_GETTER_TYPE from "@/store/modules/user/getter-types";
 
 export default {
     name: "AppHeader",
     computed: {
         ...mapGetters({
-            user: "getUser",
+            user: USER_GETTER_TYPE.GET_USER,
         }),
     },
     methods: {
@@ -52,10 +55,10 @@ export default {
             const payload = {
                 name: "AuthModal",
             };
-            this.$store.dispatch("openModal", payload);
+            this.$store.dispatch(MODAL_ACTION_TYPE.OPEN_MODAL, payload);
         },
         signOut() {
-            this.$store.dispatch("signOut");
+            this.$store.dispatch(AUTH_ACTION_TYPE.SIGN_OUT);
         },
     },
 };
