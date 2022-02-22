@@ -3,6 +3,7 @@
         <nav class="container mx-auto flex justify-start items-center py-5 px-4">
             <router-link
                 class="text-white font-bold uppercase text-2xl mr-4"
+                exact-active-class="no-active"
                 to="/"
             >
                 Music
