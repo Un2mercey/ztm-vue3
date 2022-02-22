@@ -18,7 +18,7 @@
                             About
                         </router-link>
                     </li>
-                    <li v-if="!user">
+                    <li v-if="!isAuthorized">
                         <a
                             class="px-2 text-white"
                             href="#"
@@ -54,9 +54,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import MODAL_ACTION_TYPES from "@/store/modules/modal/action-types";
-import AUTH_ACTION_TYPES from "@/store/modules/auth/action-types";
-import USER_GETTER_TYPES from "@/store/modules/user/getter-types";
 import ROUTE_NAMES from "@/router/route-names";
 
 export default {
@@ -68,18 +65,15 @@ export default {
     },
     computed: {
         ...mapGetters({
-            user: USER_GETTER_TYPES.GET_USER,
+            isAuthorized: "getIsAuthorized",
         }),
     },
     methods: {
         openAuthModal() {
-            const payload = {
-                name: "AuthModal",
-            };
-            this.$store.dispatch(MODAL_ACTION_TYPES.OPEN_MODAL, payload);
+            this.$store.dispatch("openModal", { name: "AuthModal" });
         },
         signOut() {
-            this.$store.dispatch(AUTH_ACTION_TYPES.SIGN_OUT);
+            this.$store.dispatch("signOut");
         },
     },
 };

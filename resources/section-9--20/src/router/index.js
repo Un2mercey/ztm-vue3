@@ -19,10 +19,10 @@ const routes = [
     {
         name: ROUTE_NAMES.MANAGE,
         path: ROUTE_URLS.MANAGE,
-        alias: ROUTE_URLS.MANAGE_MUSIC,
         component: Manage,
     },
     {
+        name: ROUTE_NAMES.NONEXISTENT,
         path: ROUTE_URLS.CATCH_ALL,
         redirect: { name: ROUTE_NAMES.HOME },
     },
@@ -32,10 +32,6 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
     linkExactActiveClass: "text-yellow-500",
-});
-
-router.beforeEach((to, from, next) => {
-
 });
 
 export default router;

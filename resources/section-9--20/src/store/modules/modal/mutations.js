@@ -1,16 +1,16 @@
-import MODAL_MUTATION_TYPES from "./mutation-types";
+import MODAL_MUTATIONS_TYPES from "./mutation-types";
 
 const mutations = {
-    [MODAL_MUTATION_TYPES.OPEN_MODAL](state) {
+    [MODAL_MUTATIONS_TYPES.OPEN_MODAL](state) {
         state.modalIsOpen = true;
     },
-    [MODAL_MUTATION_TYPES.CLOSE_MODAL](state) {
+    [MODAL_MUTATIONS_TYPES.CLOSE_MODAL](state) {
         state.modalIsOpen = false;
     },
-    [MODAL_MUTATION_TYPES.SET_NAME_MODAL](state, name) {
+    [MODAL_MUTATIONS_TYPES.SET_MODAL_NAME](state, name) {
         state.name = name;
     },
-    [MODAL_MUTATION_TYPES.SET_CONTEXT_MODAL](state, context) {
+    [MODAL_MUTATIONS_TYPES.SET_MODAL_CONTEXT](state, context) {
         state.context = context;
     },
 };

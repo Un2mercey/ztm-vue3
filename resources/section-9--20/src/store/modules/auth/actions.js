@@ -1,19 +1,19 @@
 import { auth } from "@/includes/firebase";
 import { ALERT_TYPE } from "@/tools/constants";
-import AUTH_ACTION_TYPES from "./action-types";
-import USER_MUTATION_TYPES from "../user/mutation-types";
-import ALERT_MUTATION_TYPES from "../alert/mutation-types";
+import USER_MUTATIONS_TYPES from "../user/mutation-types";
+import ALERT_MUTATIONS_TYPES from "../alert/mutation-types";
+import AUTH_MUTATIONS_TYPES from "./mutation-types";
 import usersCollection from "@/includes/firebase-collections";
 
 const actions = {
-    async [AUTH_ACTION_TYPES.REGISTER]({ commit, dispatch }, {
+    async register({ commit, dispatch }, {
         email, password, name, age, country, favoriteArtist,
     }) {
         let errorResponse;
 
         try {
             const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
-            await dispatch(AUTH_ACTION_TYPES.SET_USER_CREDENTIALS, {
+            await dispatch("setUserCredentials", {
                 uid: userCredentials.user.uid,
                 name,
                 email,
@@ -21,18 +21,19 @@ const actions = {
                 country,
                 favoriteArtist,
             });
-            await dispatch(AUTH_ACTION_TYPES.UPDATE_USER_PROFILE, {
+            await dispatch("updateUserProfile", {
                 user: userCredentials.user,
                 name,
             });
-            commit(USER_MUTATION_TYPES.SET_USER, auth.currentUser);
-            commit(ALERT_MUTATION_TYPES.SET_ALERT, {
+            commit(AUTH_MUTATIONS_TYPES.SET_IS_AUTHORIZED, true);
+            commit(USER_MUTATIONS_TYPES.SET_USER, auth.currentUser);
+            commit(ALERT_MUTATIONS_TYPES.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your account has been created.",
             });
         } catch (errors) {
             errorResponse = errors;
-            commit(ALERT_MUTATION_TYPES.SET_ALERT, {
+            commit(ALERT_MUTATIONS_TYPES.SET_ALERT, {
                 type: ALERT_TYPE.ERROR,
                 message: "An unexpected error occurred. Please try again later.",
             });
@@ -46,7 +47,7 @@ const actions = {
             }
         });
     },
-    [AUTH_ACTION_TYPES.SET_USER_CREDENTIALS](context, {
+    setUserCredentials(context, {
         uid, name, email, age, country, favoriteArtist,
     }) {
         return usersCollection.doc(uid).set({
@@ -57,29 +58,31 @@ const actions = {
             favoriteArtist,
         });
     },
-    [AUTH_ACTION_TYPES.UPDATE_USER_PROFILE](context, { user, name }) {
+    updateUserProfile(context, { user, name }) {
         return user.updateProfile({
             displayName: name,
         });
     },
-    [AUTH_ACTION_TYPES.INIT_LOGIN]({ commit }) {
+    initLogin({ commit }) {
         if (auth.currentUser) {
-            commit(USER_MUTATION_TYPES.SET_USER, auth.currentUser);
+            commit(USER_MUTATIONS_TYPES.SET_USER, auth.currentUser);
+            commit(AUTH_MUTATIONS_TYPES.SET_IS_AUTHORIZED, true);
         }
     },
-    async [AUTH_ACTION_TYPES.LOGIN]({ commit }, { email, password }) {
+    async login({ commit }, { email, password }) {
         let errorResponse;
 
         try {
             await auth.signInWithEmailAndPassword(email, password);
-            commit(USER_MUTATION_TYPES.SET_USER, auth.currentUser);
-            commit(ALERT_MUTATION_TYPES.SET_ALERT, {
+            commit(USER_MUTATIONS_TYPES.SET_USER, auth.currentUser);
+            commit(AUTH_MUTATIONS_TYPES.SET_IS_AUTHORIZED, true);
+            commit(ALERT_MUTATIONS_TYPES.SET_ALERT, {
                 type: ALERT_TYPE.SUCCESS,
                 message: "Success! Your are now logged in.",
             });
         } catch (errors) {
             errorResponse = errors;
-            commit(ALERT_MUTATION_TYPES.SET_ALERT, {
+            commit(ALERT_MUTATIONS_TYPES.SET_ALERT, {
                 type: ALERT_TYPE.ERROR,
                 message: "Invalid login details.",
             });
@@ -93,9 +96,10 @@ const actions = {
             }
         });
     },
-    async [AUTH_ACTION_TYPES.SIGN_OUT]({ commit }) {
+    async signOut({ commit }) {
         await auth.signOut();
-        commit(USER_MUTATION_TYPES.SET_USER, null);
+        commit(USER_MUTATIONS_TYPES.SET_USER, null);
+        commit(AUTH_MUTATIONS_TYPES.SET_IS_AUTHORIZED, false);
     },
 };
 

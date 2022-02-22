@@ -1,7 +1,7 @@
-import USER_MUTATION_TYPES from "./mutation-types";
+import USER_MUTATIONS_TYPES from "./mutation-types";
 
 const mutations = {
-    [USER_MUTATION_TYPES.SET_USER](state, payload) {
+    [USER_MUTATIONS_TYPES.SET_USER](state, payload) {
         state.user = payload;
     },
 };

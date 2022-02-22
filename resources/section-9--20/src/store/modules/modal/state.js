@@ -1,7 +1,7 @@
 const state = {
-    name: null,
+    modalName: null,
     modalIsOpen: false,
-    context: {},
+    modalContext: {},
 };
 
 export default state;
