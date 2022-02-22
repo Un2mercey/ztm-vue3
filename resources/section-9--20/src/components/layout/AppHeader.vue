@@ -4,7 +4,7 @@
             <router-link
                 class="text-white font-bold uppercase text-2xl mr-4"
                 exact-active-class="no-active"
-                to="/"
+                :to="ROUTE_URL.HOME_PAGE"
             >
                 Music
             </router-link>
@@ -13,7 +13,7 @@
                     <li>
                         <router-link
                             class="px-2 text-white"
-                            to="/about"
+                            :to="ROUTE_URL.ABOUT_PAGE"
                         >
                             About
                         </router-link>
@@ -31,7 +31,7 @@
                         <li>
                             <router-link
                                 class="px-2 text-white"
-                                to="/manage"
+                                :to="ROUTE_URL.MANAGE_PAGE"
                             >
                                 Manage
                             </router-link>
@@ -57,9 +57,15 @@ import { mapGetters } from "vuex";
 import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
 import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
 import USER_GETTER_TYPE from "@/store/modules/user/getter-types";
+import ROUTE_URL from "@/router/route-urls";
 
 export default {
     name: "AppHeader",
+    data() {
+        return {
+            ROUTE_URL,
+        };
+    },
     computed: {
         ...mapGetters({
             user: USER_GETTER_TYPE.GET_USER,
