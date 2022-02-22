@@ -3,12 +3,20 @@
         <nav class="container mx-auto flex justify-start items-center py-5 px-4">
             <router-link
                 class="text-white font-bold uppercase text-2xl mr-4"
-                to="/about"
+                to="/"
             >
                 Music
             </router-link>
             <div class="flex flex-grow items-center">
                 <ul class="flex flex-row mt-1">
+                    <li>
+                        <router-link
+                            class="px-2 text-white"
+                            to="/about"
+                        >
+                            About
+                        </router-link>
+                    </li>
                     <li v-if="!user">
                         <a
                             class="px-2 text-white"
@@ -20,9 +28,12 @@
                     </li>
                     <template v-else>
                         <li>
-                            <a class="px-2 text-white" href="#">
+                            <router-link
+                                class="px-2 text-white"
+                                to="/manage"
+                            >
                                 Manage
-                            </a>
+                            </router-link>
                         </li>
                         <li>
                             <a
