@@ -1,6 +1,6 @@
-const ALERT_MUTATION_TYPE = {
+const ALERT_MUTATION_TYPES = {
     SET_ALERT: "SET_ALERT",
     RESET_ALERT: "RESET_ALERT",
-}
+};
 
-export default ALERT_MUTATION_TYPE;
+export default ALERT_MUTATION_TYPES;

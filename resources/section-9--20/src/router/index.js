@@ -2,19 +2,23 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home";
 import About from "@/views/About";
 import Manage from "@/views/Manage";
-import ROUTE_URL from "./route-urls";
+import ROUTE_URLS from "./route-urls";
+import ROUTE_NAMES from "./route-names";
 
 const routes = [
     {
-        path: ROUTE_URL.HOME_PAGE,
+        name: ROUTE_NAMES.HOME,
+        path: ROUTE_URLS.HOME,
         component: Home,
     },
     {
-        path: ROUTE_URL.ABOUT_PAGE,
+        name: ROUTE_NAMES.ABOUT,
+        path: ROUTE_URLS.ABOUT,
         component: About,
     },
     {
-        path: ROUTE_URL.MANAGE_PAGE,
+        name: ROUTE_NAMES.MANAGE,
+        path: ROUTE_URLS.MANAGE,
         component: Manage,
     },
 ];

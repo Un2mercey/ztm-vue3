@@ -65,8 +65,8 @@ import { mapGetters } from "vuex";
 import { AUTH_MODAL_TABS } from "@/tools/constants";
 import RegisterForm from "@/components/forms/RegisterForm";
 import LoginForm from "@/components/forms/LoginForm";
-import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
-import MODAL_GETTER_TYPE from "@/store/modules/modal/getter-types";
+import MODAL_ACTION_TYPES from "@/store/modules/modal/action-types";
+import MODAL_GETTER_TYPES from "@/store/modules/modal/getter-types";
 
 export default {
     name: "AuthModal",
@@ -83,8 +83,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            modalName: MODAL_GETTER_TYPE.GET_MODAL_NAME,
-            modalIsOpen: MODAL_GETTER_TYPE.GET_MODAL_IS_OPEN,
+            modalName: MODAL_GETTER_TYPES.GET_MODAL_NAME,
+            modalIsOpen: MODAL_GETTER_TYPES.GET_MODAL_IS_OPEN,
         }),
         isVisible() {
             return this.modalIsOpen && this.modalName === this.modalId;
@@ -92,7 +92,7 @@ export default {
     },
     methods: {
         closeModal() {
-            this.$store.dispatch(MODAL_ACTION_TYPE.CLOSE_MODAL);
+            this.$store.dispatch(MODAL_ACTION_TYPES.CLOSE_MODAL);
         },
         switchTab(tab) {
             this.currentTab = tab;

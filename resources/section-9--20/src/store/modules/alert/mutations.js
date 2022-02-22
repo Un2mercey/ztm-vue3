@@ -1,14 +1,14 @@
-import ALERT_MUTATION_TYPE from "./mutation-types";
+import ALERT_MUTATION_TYPES from "./mutation-types";
 import getAlertStyle from "@/tools/alert-style";
 
 const mutations = {
-    [ALERT_MUTATION_TYPE.SET_ALERT](state, { type, message }) {
+    [ALERT_MUTATION_TYPES.SET_ALERT](state, { type, message }) {
         state.alert = {
             message,
             style: getAlertStyle(type),
         };
     },
-    [ALERT_MUTATION_TYPE.RESET_ALERT](state) {
+    [ALERT_MUTATION_TYPES.RESET_ALERT](state) {
         state.alert = {};
     },
 };

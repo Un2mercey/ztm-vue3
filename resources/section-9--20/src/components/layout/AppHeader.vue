@@ -4,7 +4,7 @@
             <router-link
                 class="text-white font-bold uppercase text-2xl mr-4"
                 exact-active-class="no-active"
-                :to="ROUTE_URL.HOME_PAGE"
+                :to="{ name: ROUTE_NAMES.HOME }"
             >
                 Music
             </router-link>
@@ -13,7 +13,7 @@
                     <li>
                         <router-link
                             class="px-2 text-white"
-                            :to="ROUTE_URL.ABOUT_PAGE"
+                            :to="{ name: ROUTE_NAMES.ABOUT }"
                         >
                             About
                         </router-link>
@@ -31,7 +31,7 @@
                         <li>
                             <router-link
                                 class="px-2 text-white"
-                                :to="ROUTE_URL.MANAGE_PAGE"
+                                :to="{ name: ROUTE_NAMES.MANAGE }"
                             >
                                 Manage
                             </router-link>
@@ -54,21 +54,21 @@
 
 <script>
 import { mapGetters } from "vuex";
-import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
-import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
-import USER_GETTER_TYPE from "@/store/modules/user/getter-types";
-import ROUTE_URL from "@/router/route-urls";
+import MODAL_ACTION_TYPES from "@/store/modules/modal/action-types";
+import AUTH_ACTION_TYPES from "@/store/modules/auth/action-types";
+import USER_GETTER_TYPES from "@/store/modules/user/getter-types";
+import ROUTE_NAMES from "@/router/route-names";
 
 export default {
     name: "AppHeader",
     data() {
         return {
-            ROUTE_URL,
+            ROUTE_NAMES,
         };
     },
     computed: {
         ...mapGetters({
-            user: USER_GETTER_TYPE.GET_USER,
+            user: USER_GETTER_TYPES.GET_USER,
         }),
     },
     methods: {
@@ -76,10 +76,10 @@ export default {
             const payload = {
                 name: "AuthModal",
             };
-            this.$store.dispatch(MODAL_ACTION_TYPE.OPEN_MODAL, payload);
+            this.$store.dispatch(MODAL_ACTION_TYPES.OPEN_MODAL, payload);
         },
         signOut() {
-            this.$store.dispatch(AUTH_ACTION_TYPE.SIGN_OUT);
+            this.$store.dispatch(AUTH_ACTION_TYPES.SIGN_OUT);
         },
     },
 };

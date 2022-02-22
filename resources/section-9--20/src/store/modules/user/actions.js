@@ -1,9 +1,9 @@
-import USER_ACTION_TYPE from "./action-types";
-import USER_MUTATION_TYPE from "./mutation-types";
+import USER_ACTION_TYPES from "./action-types";
+import USER_MUTATION_TYPES from "./mutation-types";
 
 const actions = {
-    [USER_ACTION_TYPE.SET_USER]({ commit }, payload) {
-        commit(USER_MUTATION_TYPE.SET_USER, payload);
+    [USER_ACTION_TYPES.SET_USER]({ commit }, payload) {
+        commit(USER_MUTATION_TYPES.SET_USER, payload);
     },
 };
 

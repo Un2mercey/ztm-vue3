@@ -1,5 +1,5 @@
-const ALERT_GETTER_TYPE = {
+const ALERT_GETTER_TYPES = {
     GET_ALERT: "GET_ALERT",
 };
 
-export default ALERT_GETTER_TYPE;
+export default ALERT_GETTER_TYPES;

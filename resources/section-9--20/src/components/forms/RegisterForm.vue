@@ -76,9 +76,9 @@ import AppInputField from "@/ui/AppInputField";
 import AppSelectField from "@/ui/AppSelectField";
 import AppAlert from "@/components/AppAlert";
 import { ALERT_TYPE } from "@/tools/constants";
-import ALERT_ACTION_TYPE from "@/store/modules/alert/action-types";
-import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
-import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
+import ALERT_ACTION_TYPES from "@/store/modules/alert/action-types";
+import AUTH_ACTION_TYPES from "@/store/modules/auth/action-types";
+import MODAL_ACTION_TYPES from "@/store/modules/modal/action-types";
 
 export default {
     name: "RegisterForm",
@@ -106,15 +106,15 @@ export default {
         async register(formData) {
             this.showAlert = true;
             this.isLoading = true;
-            this.$store.dispatch(ALERT_ACTION_TYPE.SET_ALERT, {
+            this.$store.dispatch(ALERT_ACTION_TYPES.SET_ALERT, {
                 type: ALERT_TYPE.PENDING,
                 message: "Please wait! Your account is being created.",
             });
             try {
-                await this.$store.dispatch(AUTH_ACTION_TYPE.REGISTER, formData);
+                await this.$store.dispatch(AUTH_ACTION_TYPES.REGISTER, formData);
                 setTimeout(() => {
                     this.showAlert = false;
-                    this.$store.dispatch(MODAL_ACTION_TYPE.CLOSE_MODAL);
+                    this.$store.dispatch(MODAL_ACTION_TYPES.CLOSE_MODAL);
                 }, 500);
             } catch (e) {
                 console.error(e);

@@ -1,6 +1,6 @@
-const ALERT_ACTION_TYPE = {
+const ALERT_ACTION_TYPES = {
     SET_ALERT: "SET_ALERT",
     RESET_ALERT: "RESET_ALERT",
 };
 
-export default ALERT_ACTION_TYPE;
+export default ALERT_ACTION_TYPES;
