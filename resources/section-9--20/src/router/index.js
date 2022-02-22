@@ -21,6 +21,10 @@ const routes = [
         path: ROUTE_URLS.MANAGE,
         component: Manage,
     },
+    {
+        path: ROUTE_URLS.CATCH_ALL,
+        redirect: { name: ROUTE_NAMES.HOME },
+    },
 ];
 
 const router = createRouter({
