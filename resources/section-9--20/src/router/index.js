@@ -19,6 +19,7 @@ const routes = [
     {
         name: ROUTE_NAMES.MANAGE,
         path: ROUTE_URLS.MANAGE,
+        alias: ROUTE_URLS.MANAGE_MUSIC,
         component: Manage,
     },
     {
