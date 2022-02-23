@@ -4,6 +4,8 @@ import About from "@/views/About";
 import Manage from "@/views/Manage";
 import ROUTE_URLS from "./route-urls";
 import ROUTE_NAMES from "./route-names";
+import store from "../store/index";
+import { PREVIOUS_ROUTE_KEY } from "@/tools/constants";
 
 const routes = [
     {
@@ -24,7 +26,6 @@ const routes = [
     {
         name: ROUTE_NAMES.NONEXISTENT,
         path: ROUTE_URLS.CATCH_ALL,
-        redirect: { name: ROUTE_NAMES.HOME },
     },
 ];
 
@@ -32,6 +33,18 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
     linkExactActiveClass: "text-yellow-500",
+});
+
+router.beforeEach((route) => {
+    if (route.name === ROUTE_NAMES.NONEXISTENT
+        || (!store.getters.getIsAuthorized && route.name === ROUTE_NAMES.MANAGE)
+    ) {
+        router.push({ name: sessionStorage.getItem(PREVIOUS_ROUTE_KEY) || ROUTE_NAMES.HOME });
+    }
+});
+
+router.afterEach((route) => {
+    sessionStorage.setItem(PREVIOUS_ROUTE_KEY, `${route.name}`);
 });
 
 export default router;
