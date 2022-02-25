@@ -1,5 +1,6 @@
 <template>
-    <section class="container mx-auto mt-6">
+    <PageLayout>
+        <section class="container mx-auto mt-6">
         <div class="md:grid md:grid-cols-3 md:gap-4">
             <div class="col-span-1">
                 <div class="bg-white rounded border border-gray-200 relative flex flex-col">
@@ -132,4 +133,16 @@
             </div>
         </div>
     </section>
+    </PageLayout>
 </template>
+
+<script>
+import PageLayout from "@/components/layout/PageLayout";
+
+export default {
+    name: "ManagePage",
+    components: {
+        PageLayout,
+    },
+};
+</script>

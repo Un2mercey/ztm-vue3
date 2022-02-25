@@ -50,14 +50,19 @@
             </div>
         </nav>
     </header>
+    <AppAuthModal/>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import AppAuthModal from "@/components/modals/AuthModal";
 import ROUTE_NAMES from "@/router/route-names";
 
 export default {
     name: "AppHeader",
+    components: {
+        AppAuthModal,
+    },
     data() {
         return {
             ROUTE_NAMES,
@@ -72,8 +77,11 @@ export default {
         openAuthModal() {
             this.$store.dispatch("openModal", { name: "AuthModal" });
         },
-        signOut() {
-            this.$store.dispatch("signOut");
+        async signOut() {
+            this.$store.dispatch("setIsLoading", true);
+            await this.$store.dispatch("signOut");
+            this.$store.dispatch("setIsLoading", false);
+            window.location.reload();
         },
     },
 };

@@ -1,31 +1,44 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home";
-import About from "@/views/About";
-import Manage from "@/views/Manage";
 import ROUTE_URLS from "./route-urls";
 import ROUTE_NAMES from "./route-names";
+import AboutPage from "@/views/About";
+import NotFoundPage from "@/views/NotFound";
+import HomePage from "@/views/Home";
+import ManagePage from "@/views/Manage";
+import AccessForbiddenPage from "@/views/AccessForbidden";
 import store from "../store/index";
-import { PREVIOUS_ROUTE_KEY } from "@/tools/constants";
 
 const routes = [
     {
         name: ROUTE_NAMES.HOME,
         path: ROUTE_URLS.HOME,
-        component: Home,
+        component: HomePage,
     },
     {
         name: ROUTE_NAMES.ABOUT,
         path: ROUTE_URLS.ABOUT,
-        component: About,
+        component: AboutPage,
     },
     {
         name: ROUTE_NAMES.MANAGE,
         path: ROUTE_URLS.MANAGE,
-        component: Manage,
+        component: ManagePage,
+        beforeEnter: () => (store.getters.getIsAuthorized ? true : { name: ROUTE_NAMES.ACCESS_FORBIDDEN }),
+    },
+    {
+        name: ROUTE_NAMES.ACCESS_FORBIDDEN,
+        path: ROUTE_URLS.ACCESS_FORBIDDEN,
+        component: AccessForbiddenPage,
+    },
+    {
+        name: ROUTE_NAMES.NOT_FOUND,
+        path: ROUTE_URLS.NOT_FOUND,
+        component: NotFoundPage,
     },
     {
         name: ROUTE_NAMES.NONEXISTENT,
         path: ROUTE_URLS.CATCH_ALL,
+        redirect: { name: ROUTE_NAMES.NOT_FOUND },
     },
 ];
 
@@ -33,18 +46,6 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
     linkExactActiveClass: "text-yellow-500",
-});
-
-router.beforeEach((route) => {
-    if (route.name === ROUTE_NAMES.NONEXISTENT
-        || (!store.getters.getIsAuthorized && route.name === ROUTE_NAMES.MANAGE)
-    ) {
-        router.push({ name: sessionStorage.getItem(PREVIOUS_ROUTE_KEY) || ROUTE_NAMES.HOME });
-    }
-});
-
-router.afterEach((route) => {
-    sessionStorage.setItem(PREVIOUS_ROUTE_KEY, `${route.name}`);
 });
 
 export default router;
