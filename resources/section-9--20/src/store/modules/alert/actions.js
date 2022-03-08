@@ -1,12 +1,11 @@
-import ALERT_ACTION_TYPE from "./action-types";
-import ALERT_MUTATION_TYPE from "./mutation-types";
+import ALERT_MUTATIONS_TYPES from "./mutation-types";
 
 const actions = {
-    [ALERT_ACTION_TYPE.SET_ALERT]: ({ commit }, payload) => {
-        commit(ALERT_MUTATION_TYPE.SET_ALERT, payload);
+    setAlert: ({ commit }, payload) => {
+        commit(ALERT_MUTATIONS_TYPES.SET_ALERT, payload);
     },
-    [ALERT_ACTION_TYPE.RESET_ALERT]: ({ commit }) => {
-        commit(ALERT_MUTATION_TYPE.RESET_ALERT);
+    resetAlert: ({ commit }) => {
+        commit(ALERT_MUTATIONS_TYPES.RESET_ALERT);
     },
 };
 

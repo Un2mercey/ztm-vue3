@@ -30,10 +30,7 @@
 <script>
 import AppInputField from "@/ui/AppInputField";
 import AppAlert from "@/components/AppAlert";
-import ALERT_ACTION_TYPE from "@/store/modules/alert/action-types";
-import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
 import { ALERT_TYPE } from "@/tools/constants";
-import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
 
 export default {
     name: "LoginForm",
@@ -55,16 +52,16 @@ export default {
         async login(formData) {
             this.showAlert = true;
             this.isLoading = true;
-            this.$store.dispatch(ALERT_ACTION_TYPE.SET_ALERT, {
+            this.$store.dispatch("setAlert", {
                 type: ALERT_TYPE.PENDING,
                 message: "Please wait! We are logging you in.",
             });
 
             try {
-                await this.$store.dispatch(AUTH_ACTION_TYPE.LOGIN, formData);
+                await this.$store.dispatch("login", formData);
                 setTimeout(() => {
                     this.showAlert = false;
-                    this.$store.dispatch(MODAL_ACTION_TYPE.CLOSE_MODAL);
+                    this.$store.dispatch("closeModal");
                 }, 500);
             } catch (e) {
                 console.error(e);

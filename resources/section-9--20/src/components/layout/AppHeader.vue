@@ -1,12 +1,24 @@
 <template>
     <header id="header" class="bg-gray-700">
         <nav class="container mx-auto flex justify-start items-center py-5 px-4">
-            <a class="text-white font-bold uppercase text-2xl mr-4" href="#">
+            <router-link
+                class="text-white font-bold uppercase text-2xl mr-4"
+                exact-active-class="no-active"
+                :to="{ name: ROUTE_NAMES.HOME }"
+            >
                 Music
-            </a>
+            </router-link>
             <div class="flex flex-grow items-center">
                 <ul class="flex flex-row mt-1">
-                    <li v-if="!user">
+                    <li>
+                        <router-link
+                            class="px-2 text-white"
+                            :to="{ name: ROUTE_NAMES.ABOUT }"
+                        >
+                            About
+                        </router-link>
+                    </li>
+                    <li v-if="!isAuthorized">
                         <a
                             class="px-2 text-white"
                             href="#"
@@ -17,9 +29,12 @@
                     </li>
                     <template v-else>
                         <li>
-                            <a class="px-2 text-white" href="#">
+                            <router-link
+                                class="px-2 text-white"
+                                :to="{ name: ROUTE_NAMES.MANAGE }"
+                            >
                                 Manage
-                            </a>
+                            </router-link>
                         </li>
                         <li>
                             <a
@@ -35,30 +50,38 @@
             </div>
         </nav>
     </header>
+    <AppAuthModal/>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import MODAL_ACTION_TYPE from "@/store/modules/modal/action-types";
-import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
-import USER_GETTER_TYPE from "@/store/modules/user/getter-types";
+import AppAuthModal from "@/components/modals/AuthModal";
+import ROUTE_NAMES from "@/router/route-names";
 
 export default {
     name: "AppHeader",
+    components: {
+        AppAuthModal,
+    },
+    data() {
+        return {
+            ROUTE_NAMES,
+        };
+    },
     computed: {
         ...mapGetters({
-            user: USER_GETTER_TYPE.GET_USER,
+            isAuthorized: "getIsAuthorized",
         }),
     },
     methods: {
         openAuthModal() {
-            const payload = {
-                name: "AuthModal",
-            };
-            this.$store.dispatch(MODAL_ACTION_TYPE.OPEN_MODAL, payload);
+            this.$store.dispatch("openModal", { name: "AuthModal" });
         },
-        signOut() {
-            this.$store.dispatch(AUTH_ACTION_TYPE.SIGN_OUT);
+        async signOut() {
+            this.$store.dispatch("setIsLoading", true);
+            await this.$store.dispatch("signOut");
+            this.$store.dispatch("setIsLoading", false);
+            window.location.reload();
         },
     },
 };

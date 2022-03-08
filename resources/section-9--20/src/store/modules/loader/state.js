@@ -1,5 +1,5 @@
 const state = {
-    isAuthorized: false,
+    isLoading: false,
 };
 
 export default state;

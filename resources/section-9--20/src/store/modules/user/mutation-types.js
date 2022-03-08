@@ -1,5 +1,5 @@
-const USER_MUTATION_TYPE = {
+const USER_MUTATIONS_TYPES = {
     SET_USER: "SET_USER",
-}
+};
 
-export default USER_MUTATION_TYPE;
+export default USER_MUTATIONS_TYPES;

@@ -1,25 +1,24 @@
 <template>
-    <AppHeader/>
+    <GlassBlocker v-if="isGlobalLoading"/>
     <router-view/>
-    <AppPlayer/>
-    <AppAuthModal/>
 </template>
 
 <script>
-import AppHeader from "@/components/layout/AppHeader";
-import AppPlayer from "@/components/AppPlayer";
-import AppAuthModal from "@/components/modals/AuthModal";
-import AUTH_ACTION_TYPE from "@/store/modules/auth/action-types";
+import { mapGetters } from "vuex";
+import GlassBlocker from "@/components/GlassBlocker";
 
 export default {
     name: "App",
     components: {
-        AppHeader,
-        AppPlayer,
-        AppAuthModal,
+        GlassBlocker,
+    },
+    computed: {
+        ...mapGetters({
+            isGlobalLoading: "getIsLoading",
+        }),
     },
     created() {
-        this.$store.dispatch(AUTH_ACTION_TYPE.INIT_LOGIN);
+        this.$store.dispatch("initLogin");
     },
 };
 </script>

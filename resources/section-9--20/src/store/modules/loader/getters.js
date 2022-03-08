@@ -1,5 +1,5 @@
 const getters = {
-    getUser: (state) => state.user,
+    getIsLoading: (state) => state.isLoading,
 };
 
 export default getters;
