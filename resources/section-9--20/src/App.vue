@@ -1,5 +1,5 @@
 <template>
-    <GlassBlocker v-if="isGlobalLoading" />
+    <GlassBlocker v-if="isGlobalLoading"/>
     <router-view/>
 </template>
 
